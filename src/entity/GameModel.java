@@ -13,6 +13,12 @@ public class GameModel {
     private int width;                  //宽
 
     public Rectangle getHurtArea() {
+        hurtArea.setBounds(
+                getX() + 10,
+                getY() + 10,
+                getImage().getWidth() - 10,
+                getImage().getHeight() - 10
+        );
         return hurtArea;
     }
 
