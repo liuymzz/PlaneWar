@@ -16,18 +16,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" column="87" lean-forward="false" selection-start-line="23" selection-start-column="87" selection-end-line="23" selection-end-column="87" />
+            <state relative-caret-position="181">
+              <caret line="112" column="22" lean-forward="false" selection-start-line="112" selection-start-column="22" selection-end-line="112" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+                <element signature="method#drawEnemyPlanes#0;class#HB#0;class#MainUI#0" expanded="false" />
+                <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-                <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
+                <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+                <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
                 <element signature="method#generateBullet#0;class#MainUI#0" expanded="false" />
                 <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
               </folding>
@@ -48,24 +51,34 @@
       <file leaf-file-name="EnemyPlane.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entity/plane/EnemyPlane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="49" column="25" lean-forward="false" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+            <state relative-caret-position="245">
+              <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#move#0;class#EnemyPlane#0" expanded="false" />
                 <element signature="method#moveRight#0;class#EnemyPlane#0" expanded="false" />
-                <element signature="method#moveLeft#0;class#EnemyPlane#0" expanded="false" />
                 <element signature="method#moveDown#0;class#EnemyPlane#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Factory.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Plane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/plane/Plane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Factory.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/Factory.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+              <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,28 +89,49 @@
       <file leaf-file-name="MyPlane.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entity/plane/MyPlane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="12" column="49" lean-forward="false" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
+            <state relative-caret-position="28">
+              <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getCurrImage#0;class#MyPlane#0" expanded="false" />
                 <element signature="method#moveUp#0;class#MyPlane#0" expanded="false" />
                 <element signature="method#moveDown#0;class#MyPlane#0" expanded="false" />
                 <element signature="method#moveLeft#0;class#MyPlane#0" expanded="false" />
                 <element signature="method#moveRight#0;class#MyPlane#0" expanded="false" />
-                <element signature="e#2234#2235#0" expanded="true" />
-                <element signature="e#2266#2267#0" expanded="true" />
+                <element signature="e#2150#2151#0" expanded="true" />
+                <element signature="e#2182#2183#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Plane.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/plane/Plane.java">
+      <file leaf-file-name="BOOM.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/BOOM.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="442">
+              <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#863#864#0" expanded="true" />
+                <element signature="e#887#888#0" expanded="true" />
+                <element signature="e#918#919#0" expanded="true" />
+                <element signature="e#944#945#0" expanded="true" />
+                <element signature="e#969#970#0" expanded="true" />
+                <element signature="e#993#994#0" expanded="true" />
+                <element signature="e#1024#1025#0" expanded="true" />
+                <element signature="e#1050#1051#0" expanded="true" />
+                <element signature="e#1079#1080#0" expanded="true" />
+                <element signature="e#1107#1108#0" expanded="true" />
+                <element signature="e#1146#1147#0" expanded="true" />
+                <element signature="e#1180#1181#0" expanded="true" />
+                <element signature="e#1212#1213#0" expanded="true" />
+                <element signature="e#1243#1244#0" expanded="true" />
+                <element signature="e#1288#1289#0" expanded="true" />
+                <element signature="e#1328#1329#0" expanded="true" />
+                <element signature="e#1367#1368#0" expanded="true" />
+                <element signature="e#1395#1396#0" expanded="true" />
+                <element signature="e#1444#1445#0" expanded="true" />
+                <element signature="e#1478#1479#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,10 +139,11 @@
       <file leaf-file-name="GameModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entity/GameModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+            <state relative-caret-position="884">
+              <caret line="80" column="25" lean-forward="false" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#setImage#0;class#GameModel#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -135,12 +170,13 @@
         <option value="$PROJECT_DIR$/src/utils/Constants.java" />
         <option value="$PROJECT_DIR$/src/entity/GameMap.java" />
         <option value="$PROJECT_DIR$/src/entity/plane/Plane.java" />
-        <option value="$PROJECT_DIR$/src/entity/plane/MyPlane.java" />
-        <option value="$PROJECT_DIR$/src/entity/GameModel.java" />
+        <option value="$PROJECT_DIR$/src/entity/plane/EnemyPlane.java" />
         <option value="$PROJECT_DIR$/src/entity/bullets/Bullet.java" />
         <option value="$PROJECT_DIR$/src/utils/Factory.java" />
+        <option value="$PROJECT_DIR$/src/entity/GameModel.java" />
+        <option value="$PROJECT_DIR$/src/entity/plane/MyPlane.java" />
+        <option value="$PROJECT_DIR$/src/entity/BOOM.java" />
         <option value="$PROJECT_DIR$/src/MainUI.java" />
-        <option value="$PROJECT_DIR$/src/entity/plane/EnemyPlane.java" />
       </list>
     </option>
   </component>
@@ -696,12 +732,12 @@
       <updated>1486526910963</updated>
       <workItem from="1486526912469" duration="293000" />
       <workItem from="1486527228967" duration="8895000" />
-      <workItem from="1486609497942" duration="6492000" />
+      <workItem from="1486609497942" duration="12817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15680000" />
+    <option name="totallyTimeSpent" value="22005000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
@@ -751,7 +787,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -768,9 +804,12 @@
             <element signature="imports" expanded="true" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawEnemyPlanes#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
           </folding>
@@ -783,13 +822,12 @@
           <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getCurrImage#0;class#MyPlane#0" expanded="false" />
             <element signature="method#moveUp#0;class#MyPlane#0" expanded="false" />
             <element signature="method#moveDown#0;class#MyPlane#0" expanded="false" />
             <element signature="method#moveLeft#0;class#MyPlane#0" expanded="false" />
             <element signature="method#moveRight#0;class#MyPlane#0" expanded="false" />
-            <element signature="e#2234#2235#0" expanded="true" />
-            <element signature="e#2266#2267#0" expanded="true" />
+            <element signature="e#2150#2151#0" expanded="true" />
+            <element signature="e#2182#2183#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -798,7 +836,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -808,6 +848,7 @@
           <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setImage#0;class#GameModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -845,56 +886,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/plane/Plane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/GameModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/bullets/Bullet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/enums/BulletType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="87" lean-forward="false" selection-start-line="23" selection-start-column="87" selection-end-line="23" selection-end-column="87" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
-            <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
-            <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -906,33 +902,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/plane/EnemyPlane.java">
+    <entry file="file://$PROJECT_DIR$/src/entity/bullets/Bullet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="49" column="25" lean-forward="false" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+        <state relative-caret-position="119">
+          <caret line="7" column="39" lean-forward="true" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#move#0;class#EnemyPlane#0" expanded="false" />
-            <element signature="method#moveRight#0;class#EnemyPlane#0" expanded="false" />
-            <element signature="method#moveLeft#0;class#EnemyPlane#0" expanded="false" />
-            <element signature="method#moveDown#0;class#EnemyPlane#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/plane/MyPlane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="12" column="49" lean-forward="false" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getCurrImage#0;class#MyPlane#0" expanded="false" />
-            <element signature="method#moveUp#0;class#MyPlane#0" expanded="false" />
-            <element signature="method#moveDown#0;class#MyPlane#0" expanded="false" />
-            <element signature="method#moveLeft#0;class#MyPlane#0" expanded="false" />
-            <element signature="method#moveRight#0;class#MyPlane#0" expanded="false" />
-            <element signature="e#2234#2235#0" expanded="true" />
-            <element signature="e#2266#2267#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -940,9 +915,116 @@
     <entry file="file://$PROJECT_DIR$/src/utils/Factory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/plane/Plane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/plane/EnemyPlane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+          <folding>
+            <element signature="method#move#0;class#EnemyPlane#0" expanded="false" />
+            <element signature="method#moveRight#0;class#EnemyPlane#0" expanded="false" />
+            <element signature="method#moveDown#0;class#EnemyPlane#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/GameModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="80" column="25" lean-forward="false" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setImage#0;class#GameModel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/plane/MyPlane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#moveUp#0;class#MyPlane#0" expanded="false" />
+            <element signature="method#moveDown#0;class#MyPlane#0" expanded="false" />
+            <element signature="method#moveLeft#0;class#MyPlane#0" expanded="false" />
+            <element signature="method#moveRight#0;class#MyPlane#0" expanded="false" />
+            <element signature="e#2150#2151#0" expanded="true" />
+            <element signature="e#2182#2183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/BOOM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#863#864#0" expanded="true" />
+            <element signature="e#887#888#0" expanded="true" />
+            <element signature="e#918#919#0" expanded="true" />
+            <element signature="e#944#945#0" expanded="true" />
+            <element signature="e#969#970#0" expanded="true" />
+            <element signature="e#993#994#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1079#1080#0" expanded="true" />
+            <element signature="e#1107#1108#0" expanded="true" />
+            <element signature="e#1146#1147#0" expanded="true" />
+            <element signature="e#1180#1181#0" expanded="true" />
+            <element signature="e#1212#1213#0" expanded="true" />
+            <element signature="e#1243#1244#0" expanded="true" />
+            <element signature="e#1288#1289#0" expanded="true" />
+            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#1367#1368#0" expanded="true" />
+            <element signature="e#1395#1396#0" expanded="true" />
+            <element signature="e#1444#1445#0" expanded="true" />
+            <element signature="e#1478#1479#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="112" column="22" lean-forward="false" selection-start-line="112" selection-start-column="22" selection-end-line="112" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawEnemyPlanes#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
           </folding>
         </state>
       </provider>

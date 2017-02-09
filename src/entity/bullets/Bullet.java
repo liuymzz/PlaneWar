@@ -3,7 +3,6 @@ package entity.bullets;
 import entity.GameModel;
 import utils.Constants;
 import utils.Medias;
-import java.awt.*;
 
 
 public class Bullet extends GameModel {

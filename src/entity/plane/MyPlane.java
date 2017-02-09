@@ -12,8 +12,6 @@ import java.util.List;
 public class MyPlane extends Plane {
     private List<Bullet> myBullets = new ArrayList();
     private int changeInterval = 0;     //刷新的时间间隔
-    private int index = 0;              //当前显示图片索引
-    private int maxIndex = 2;           //最大索引值
 
 
     public MyPlane(){
@@ -34,9 +32,9 @@ public class MyPlane extends Plane {
 
         currImage =
                 getImage().getSubimage(
-                        index * getImage().getWidth() / maxIndex,
+                        getIndex() * getImage().getWidth() / getMaxIndex(),
                         0,
-                        getImage().getWidth() / maxIndex ,
+                        getImage().getWidth() / getMaxIndex() ,
                         getImage().getHeight()
                 );
 
@@ -89,19 +87,4 @@ public class MyPlane extends Plane {
         this.myBullets = myBullets;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public int getMaxIndex() {
-        return maxIndex;
-    }
-
-    public void setMaxIndex(int maxIndex) {
-        this.maxIndex = maxIndex;
-    }
 }

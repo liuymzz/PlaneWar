@@ -1,5 +1,8 @@
+import entity.BOOM;
 import entity.GameMap;
 import entity.GameModel;
+import entity.bullets.Bullet;
+import entity.plane.EnemyPlane;
 import entity.plane.MyPlane;
 import entity.plane.Plane;
 import utils.Constants;
@@ -20,8 +23,9 @@ public class MainUI extends JFrame implements Runnable{
     private MyPlane myPlane = new MyPlane();
     private int generateBulletInterval = 0;                                 //产生子弹的间隔
     private boolean UP, DOWN, LEFT, RIGHT;                                  //判断方向键是否按下
-    private List<Plane> enemyPlanes = new ArrayList<>();                    //存放敌机的集合
+    private List<EnemyPlane> enemyPlanes = new ArrayList<>();               //存放敌机的集合
     private int enemyPlanesGenerateInterval = 0;                            //敌机产生的间隔时间
+    private List<BOOM> booms = new ArrayList<>();                           //存放所有的爆炸效果
 
     public MainUI(){
         setSize(Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT);
@@ -90,7 +94,31 @@ public class MainUI extends JFrame implements Runnable{
             //画玩家飞机
             g.drawImage(myPlane.getCurrImage(),myPlane.getX(),myPlane.getY(),this);
 
+            //画玩家飞机的子弹
             drawMyPlaneBullets(g);
+
+            //画敌机
+            drawEnemyPlanes(g);
+            
+            //画爆炸效果
+            drawBoom(g);
+        }
+
+        private void drawBoom(Graphics g) {
+            for (int i = 0 ; i < booms.size() ; i ++){
+                BOOM boom = booms.get(i);
+                g.drawImage(boom.getCurrImage(),boom.getX(),boom.getY(),this);
+                if(boom.getIndex() >= boom.getMaxIndex()){
+                    booms.remove(i);
+                    i --;
+                }
+            }
+        }
+
+        private void drawEnemyPlanes(Graphics g) {
+            for (int i = 0 ; i < enemyPlanes.size() ; i ++){
+                drawGameModel(g,enemyPlanes.get(i));
+            }
         }
 
         private void drawMyPlaneBullets(Graphics g) {
@@ -122,6 +150,8 @@ public class MainUI extends JFrame implements Runnable{
             generateBullet();
             moveBullet();
             moveMyPlane();
+            generateEnemyPlane();
+            moveEnemyPlane();
             hb.repaint();
 
 
@@ -133,12 +163,50 @@ public class MainUI extends JFrame implements Runnable{
         }
     }
 
-    private void moveBullet() {
-
-        for (int i = 0 ; i < myPlane.getMyBullets().size() ; i ++){
-            if(myPlane.getMyBullets().get(i).moveUp() == false){
-                myPlane.getMyBullets().remove(i);
+    private void moveEnemyPlane() {
+        for (int i = 0 ; i < enemyPlanes.size() ; i ++){
+            if(enemyPlanes.get(i).move() == false){
+                enemyPlanes.remove(i);
                 i --;
+            }
+        }
+    }
+
+    private void generateEnemyPlane() {
+        enemyPlanesGenerateInterval ++;
+        if(enemyPlanesGenerateInterval > 20){
+            Factory.generateEnemyPlane(enemyPlanes);
+            enemyPlanesGenerateInterval = 0;
+        }
+    }
+
+    private void moveBullet() {
+        List<Bullet> bullets = myPlane.getMyBullets();
+
+        for (int i = 0 ; i < bullets.size() ; i ++){
+            Bullet bullet = bullets.get(i);
+            if(bullet.moveUp() == false){
+                bullets.remove(i);
+                i --;
+                continue;
+            }
+
+            for (int j = 0 ; j < enemyPlanes.size() ; j ++){
+                EnemyPlane enemyPlane = enemyPlanes.get(j);
+                if(bullet.getHurtArea().intersects(enemyPlane.getHurtArea())){
+                    enemyPlane.setHp(enemyPlane.getHp() - bullet.getAttack());
+                    if(enemyPlane.getHp() < 0){
+                        BOOM boom = new BOOM();
+                        boom.setX(enemyPlane.getX());
+                        boom.setY(enemyPlane.getY());
+                        enemyPlanes.remove(j);
+                        booms.add(boom);
+
+                    }
+                    bullets.remove(i);
+                    i --;
+                }
+
             }
         }
     }

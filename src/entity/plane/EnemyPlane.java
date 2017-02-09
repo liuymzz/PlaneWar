@@ -1,16 +1,14 @@
 package entity.plane;
 
-import enums.Dire;
 import utils.Constants;
 
 public class EnemyPlane extends Plane {
-    private Dire dire;                      //敌机飞行的方向
     private boolean isDeathing;
 
 
 
     public boolean move() {
-        switch (dire) {
+        switch (getDire()) {
             case DOWN:
                 return moveDown();
             case LEFT:
@@ -45,14 +43,6 @@ public class EnemyPlane extends Plane {
             return false;
         }
         return true;
-    }
-
-    public Dire getDire() {
-        return dire;
-    }
-
-    public void setDire(Dire dire) {
-        this.dire = dire;
     }
 
     public boolean isDeathing() {

@@ -8,9 +8,11 @@ public class GameModel {
     private int y;                      //y坐标
     private int speed;                  //移动速度
     private BufferedImage image;        //图像
-    public Rectangle hurtArea;          //伤害区域
+    public Rectangle hurtArea = new Rectangle();          //伤害区域
     private int height;                 //高
     private int width;                  //宽
+    private int index = 0;              //当前显示图片索引
+    private int maxIndex = 2;           //最大索引值
 
     public Rectangle getHurtArea() {
         hurtArea.setBounds(
@@ -56,6 +58,8 @@ public class GameModel {
 
     public void setImage(BufferedImage image) {
         this.image = image;
+        this.width = image.getWidth();
+        this.height = image.getHeight();
     }
 
     public int getHeight() {
@@ -74,5 +78,19 @@ public class GameModel {
         this.width = width;
     }
 
+    public int getIndex() {
+        return index;
+    }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getMaxIndex() {
+        return maxIndex;
+    }
+
+    public void setMaxIndex(int maxIndex) {
+        this.maxIndex = maxIndex;
+    }
 }
