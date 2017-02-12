@@ -1,5 +1,6 @@
 package utils;
 
+import entity.Meteor;
 import entity.bullets.Bullet;
 import entity.plane.EnemyPlane;
 import entity.plane.Plane;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Factory {
+    private static Random random = new Random();
 
     /**
      *
@@ -24,7 +26,7 @@ public class Factory {
     }
 
     public static void generateEnemyPlane(List<EnemyPlane> list){
-        Random random = new Random();
+
         int ran = random.nextInt(100);
         EnemyPlane plane = new EnemyPlane();
         if (ran < 20){
@@ -65,6 +67,13 @@ public class Factory {
 
 
 
+    }
+
+    public static void generateMeteor(List<Meteor> meteors){
+        Meteor meteor = new Meteor();
+        meteor.setX(random.nextInt(Constants.WINDOW_WIDTH) - meteor.getWidth());
+        meteor.setY(-meteor.getHeight());
+        meteors.add(meteor);
     }
 
 }
