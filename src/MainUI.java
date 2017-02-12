@@ -228,11 +228,8 @@ public class MainUI extends JFrame implements Runnable {
                 if (bullet.getHurtArea().intersects(enemyPlane.getHurtArea())) {
                     enemyPlane.setHp(enemyPlane.getHp() - bullet.getAttack());
                     if (enemyPlane.getHp() < 0) {
-                        BOOM boom = new BOOM();
-                        boom.setX(enemyPlane.getX());
-                        boom.setY(enemyPlane.getY());
                         enemyPlanes.remove(j);
-                        booms.add(boom);
+                        addBoom(enemyPlane);
 
                     }
                     isRemove = true;
@@ -249,11 +246,8 @@ public class MainUI extends JFrame implements Runnable {
                     if (bullet.getHurtArea().intersects(meteor.getHurtArea())) {
                         meteor.setHp(meteor.getHp() - bullet.getAttack());
                         if (meteor.getHp() < 0) {
-                            BOOM boom = new BOOM();
-                            boom.setX(meteor.getX());
-                            boom.setY(meteor.getY());
                             meteors.remove(j);
-                            booms.add(boom);
+                            addBoom(meteor);
 
                         }
                         bullets.remove(i);
@@ -264,6 +258,13 @@ public class MainUI extends JFrame implements Runnable {
             }
 
         }
+    }
+
+    private void addBoom(GameModel gameModel){
+        BOOM boom = new BOOM();
+        boom.setX(gameModel.getX());
+        boom.setY(gameModel.getY());
+        booms.add(boom);
     }
 
     private void generateBullet() {
