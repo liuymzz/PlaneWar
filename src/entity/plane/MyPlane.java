@@ -20,9 +20,12 @@ public class MyPlane extends Plane {
         setIndex(0);
         setMaxIndex(2);
         setHeight(getImage().getHeight());
-        setWidth(getImage().getWidth() / 2);
+        setWidth(getWidth() / 2);
         setY(Constants.WINDOW_HEIGHT - getImage().getHeight());
         setX((Constants.WINDOW_WIDTH - getImage().getWidth()) / getMaxIndex());
+        setHp(2000);
+        setMaxHp(2000);
+
     }
 
 

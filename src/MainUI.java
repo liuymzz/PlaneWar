@@ -5,6 +5,7 @@ import entity.Meteor;
 import entity.bullets.Bullet;
 import entity.plane.EnemyPlane;
 import entity.plane.MyPlane;
+import enums.BulletType;
 import utils.Constants;
 import utils.Factory;
 import utils.Medias;
@@ -28,6 +29,8 @@ public class MainUI extends JFrame implements Runnable {
     private List<BOOM> booms = new ArrayList<>();                           //存放所有的爆炸效果
     private List<Meteor> meteors = new ArrayList<>();                       //存放陨石的集合
     private int meteotGenerateInteval = 0;                                  //陨石产生的时间间隔
+    private List<Bullet> enemyBullets = new ArrayList<>();                  //存放敌机子弹的集合
+    private int enemyBulletGenerateInterval = 0;                            //敌机子弹产生时间间隔
 
     public MainUI() {
         setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
@@ -107,6 +110,37 @@ public class MainUI extends JFrame implements Runnable {
 
             //画陨石
             drawMeteor(g);
+
+            //画玩家飞机的血条
+            drawMyBlood(g);
+
+            //画敌机子弹
+            drawEnemyBullet(g);
+        }
+
+        private void drawEnemyBullet(Graphics g) {
+            for (int i = 0; i < enemyBullets.size(); i ++){
+                drawGameModel(g,enemyBullets.get(i));
+            }
+        }
+
+        private void drawMyBlood(Graphics g) {
+            g.setColor(Color.RED);
+            g.draw3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
+                    Constants.WINDOW_WIDTH / 3 ,
+                    Constants.HP_HEIGHT,
+                    true
+            );
+            g.fill3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
+                    (int) (myPlane.getHp() * 1.0 / myPlane.getMaxHp() * Constants.WINDOW_WIDTH / 3) ,
+                    Constants.HP_HEIGHT,
+                    true
+                    );
+
         }
 
         private void drawMeteor(Graphics g) {
@@ -157,13 +191,15 @@ public class MainUI extends JFrame implements Runnable {
         while (1 == 1) {
 
             map.move();
-            generateBullet();
+            generateMyBullet();
             moveBullet();
             moveMyPlane();
             generateEnemyPlane();
             moveEnemyPlane();
             generateMeteor();
             moveMeteor();
+            generateEnemyBullet();
+            moveEnemyBullet();
             hb.repaint();
 
 
@@ -172,6 +208,40 @@ public class MainUI extends JFrame implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void moveEnemyBullet() {
+        for (int i = 0; i < enemyBullets.size() ; i ++){
+            Bullet bullet = enemyBullets.get(i);
+            if (bullet.moveDown() == false){
+                 enemyBullets.remove(i);
+                 i --;
+                 continue;
+            }
+
+            if(myPlane.getHurtArea().intersects(bullet.getHurtArea())){
+                myPlane.setHp(myPlane.getHp() - bullet.getAttack());
+                if (myPlane.getHp() <= 0){
+                    System.exit(0);
+                }
+
+                enemyBullets.remove(i);
+                i --;
+
+            }
+
+
+        }
+    }
+
+    private void generateEnemyBullet() {
+        enemyBulletGenerateInterval ++;
+        if(enemyBulletGenerateInterval > 10){
+            for (int i = 0; i < enemyPlanes.size(); i ++){
+                Factory.generateBullet(enemyPlanes.get(i),enemyBullets, BulletType.ENEMY);
+            }
+            enemyBulletGenerateInterval = 0;
         }
     }
 
@@ -267,10 +337,10 @@ public class MainUI extends JFrame implements Runnable {
         booms.add(boom);
     }
 
-    private void generateBullet() {
+    private void generateMyBullet() {
         generateBulletInterval++;
-        if (generateBulletInterval >= 10) {
-            Factory.generateBullet(myPlane, myPlane.getMyBullets());
+        if (generateBulletInterval >= 5) {
+            Factory.generateBullet(myPlane, myPlane.getMyBullets(),BulletType.NORMAL);
             generateBulletInterval = 0;
         }
     }

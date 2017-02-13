@@ -18,8 +18,8 @@ public class GameModel {
         hurtArea.setBounds(
                 getX() + 10,
                 getY() + 10,
-                getImage().getWidth() - 10,
-                getImage().getHeight() - 10
+                getWidth(),
+                getHeight()
         );
         return hurtArea;
     }
