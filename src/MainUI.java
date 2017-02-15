@@ -101,8 +101,19 @@ public class MainUI extends JFrame implements Runnable {
                     case KeyEvent.VK_RIGHT:
                         RIGHT = true;
                         break;
+                    case KeyEvent.VK_P:
+                        state = GameState.PAUSE;
+                        break;
                 }
                 return;
+            }
+
+            if (state == GameState.PAUSE) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_P:
+                        state = GameState.GAMING;
+                        break;
+                }
             }
 
         }
@@ -129,81 +140,108 @@ public class MainUI extends JFrame implements Runnable {
         }
     }
 
-    class MouseAd extends MouseAdapter{
+    class MouseAd extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (state == GameState.WELCOME){
+            if (state == GameState.WELCOME) {
                 //判断是否点击到退出按钮
-                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
                     System.exit(0);
                 }
             }
 
-            if (state == GameState.GAME_SELECT){
+            if (state == GameState.GAME_SELECT) {
                 //判断是否点击到开始按钮
-                if (startGame.getHurtArea().contains(e.getX(),e.getY())){
+                if (startGame.getHurtArea().contains(e.getX(), e.getY())) {
                     state = GameState.GAMING;
                 }
 
                 //判断是否点击到退出按钮
-                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
                     System.exit(0);
                 }
 
             }
 
-            if (state == GameState.OVER){
+            if (state == GameState.OVER) {
                 //是否点击到退出按钮
-                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
                     System.exit(0);
                 }
 
                 //是否点击到重玩按钮
-                if (resume.getHurtArea().contains(e.getX(),e.getY())){
-                    state = GameState.GAMING;
-                    myPlane = new MyPlane();
-                    enemyPlanes.clear();
-                    enemyBullets.clear();
-                    booms.clear();
-                    meteors.clear();
-                    defeat.setY(-defeat.getHeight());
-
+                if (resume.getHurtArea().contains(e.getX(), e.getY())) {
+                    resume();
                 }
             }
+
+            if (state == GameState.PAUSE){
+                //是否点击到退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    System.exit(0);
+                }
+
+                //是否点击到重玩按钮
+                if (resume.getHurtArea().contains(e.getX(), e.getY())) {
+                    resume();
+                }
+            }
+
+
+        }
+
+        //重新游戏
+        private void resume() {
+            state = GameState.GAMING;
+            myPlane = new MyPlane();
+            enemyPlanes.clear();
+            enemyBullets.clear();
+            booms.clear();
+            meteors.clear();
+            defeat.setY(-defeat.getHeight());
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            if (state == GameState.WELCOME){
+            if (state == GameState.WELCOME) {
                 //退出按钮
-                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
                     exit.setImage(Medias.getImage("exit_click.png"));
-                }else{
+                } else {
                     exit.setImage(Medias.getImage("exit.png"));
                 }
             }
 
-            if (state == GameState.GAME_SELECT){
+            if (state == GameState.GAME_SELECT) {
                 //开始按钮
-                if (startGame.getHurtArea().contains(e.getX(),e.getY())){
+                if (startGame.getHurtArea().contains(e.getX(), e.getY())) {
                     startGame.setImage(Medias.getImage("btn_play_click.png"));
-                }else {
+                } else {
                     startGame.setImage(Medias.getImage("btn_play.png"));
                 }
 
                 //退出按钮
-                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
                     exit.setImage(Medias.getImage("exit_click.png"));
-                }else{
+                } else {
                     exit.setImage(Medias.getImage("exit.png"));
                 }
             }
 
-            if (state == GameState.OVER){
+            if (state == GameState.OVER) {
                 //退出按钮
-                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
                     exit.setImage(Medias.getImage("exit_click.png"));
-                }else{
+                } else {
+                    exit.setImage(Medias.getImage("exit.png"));
+                }
+            }
+
+            if (state == GameState.PAUSE){
+                //退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    exit.setImage(Medias.getImage("exit_click.png"));
+                } else {
                     exit.setImage(Medias.getImage("exit.png"));
                 }
             }
@@ -215,10 +253,10 @@ public class MainUI extends JFrame implements Runnable {
         protected void paintComponent(Graphics g) {
             g.clearRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 
-            if (state == GameState.WELCOME || state == GameState.GAME_SELECT){
-                g.drawImage(Medias.getImage("startbg.jpg"),0,0,this);
-                drawGameModel(g,startGame);
-                drawGameModel(g,exit);
+            if (state == GameState.WELCOME || state == GameState.GAME_SELECT) {
+                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
+                drawGameModel(g, startGame);
+                drawGameModel(g, exit);
                 return;
             }
 
@@ -251,11 +289,18 @@ public class MainUI extends JFrame implements Runnable {
                 return;
             }
 
-            if (state == GameState.OVER){
-                g.drawImage(Medias.getImage("startbg.jpg"),0,0,this);
-                drawGameModel(g,defeat);
-                drawGameModel(g,exit);
+            if (state == GameState.OVER) {
+                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
+                drawGameModel(g, defeat);
+                drawGameModel(g, exit);
+                drawGameModel(g, resume);
+                return;
+            }
+
+            if (state == GameState.PAUSE) {
+                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
                 drawGameModel(g,resume);
+                drawGameModel(g,exit);
             }
 
         }
@@ -332,9 +377,9 @@ public class MainUI extends JFrame implements Runnable {
     public void run() {
         while (1 == 1) {
 
-            if(state == GameState.WELCOME){
+            if (state == GameState.WELCOME) {
                 startGame.setY(startGame.getY() - 5);
-                if(startGame.getY() < 300){
+                if (startGame.getY() < 300) {
                     state = GameState.GAME_SELECT;
                 }
 
@@ -354,14 +399,13 @@ public class MainUI extends JFrame implements Runnable {
                 moveEnemyBullet();
             }
 
-            if (state == GameState.OVER){
-                if(defeat.getY() < 250){
+            if (state == GameState.OVER) {
+                if (defeat.getY() < 250) {
                     defeat.setY(defeat.getY() + 3);
                 }
             }
 
             hb.repaint();
-
 
 
             try {
