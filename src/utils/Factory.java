@@ -22,7 +22,7 @@ public class Factory {
         Bullet bullet = new Bullet();
         bullet.setY(plane.getY() - 2);
         if (bulletType == BulletType.ENEMY){
-            bullet.setImage(Medias.getImage("enemybullet.png"));
+            bullet.setImage(Medias.getImage("m9.png"));
             bullet.setSpeed(8);
             bullet.setY(plane.getY() + plane.getHeight() - 1);
         }

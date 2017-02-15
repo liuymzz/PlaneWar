@@ -6,6 +6,7 @@ import entity.bullets.Bullet;
 import entity.plane.EnemyPlane;
 import entity.plane.MyPlane;
 import enums.BulletType;
+import enums.GameState;
 import utils.Constants;
 import utils.Factory;
 import utils.Medias;
@@ -14,6 +15,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ public class MainUI extends JFrame implements Runnable {
     private HB hb = new HB();
     private GameMap map = new GameMap();
     private MyPlane myPlane = new MyPlane();
+
     private int generateBulletInterval = 0;                                 //产生子弹的间隔
     private boolean UP, DOWN, LEFT, RIGHT;                                  //判断方向键是否按下
     private List<EnemyPlane> enemyPlanes = new ArrayList<>();               //存放敌机的集合
@@ -32,18 +36,36 @@ public class MainUI extends JFrame implements Runnable {
     private List<Bullet> enemyBullets = new ArrayList<>();                  //存放敌机子弹的集合
     private int enemyBulletGenerateInterval = 0;                            //敌机子弹产生时间间隔
 
+    private GameState state = GameState.WELCOME;                            //游戏全局状态
+
+    private GameModel startGame = new GameModel();                          //开始游戏按钮
+
+
     public MainUI() {
+        ////游戏元素初始化
+
+        //开始游戏按钮参数
+        startGame.setImage(Medias.getImage("btn_play.png"));
+        startGame.setX(150);
+        startGame.setY(Constants.WINDOW_HEIGHT + startGame.getHeight());
+        startGame.setSpeed(8);
+
+
+        //游戏基础界面设置
         setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setUndecorated(true);
 
-
+        //获取主面板容器并对其添加元素/监听器
         Container c = getContentPane();
         c.setFocusable(true);
         c.add(hb);
         c.addKeyListener(new KeyAd());
+        c.addMouseListener(new MouseAd());
+        c.addMouseMotionListener(new MouseAd());
 
+        //设置可见
         setVisible(true);
     }
 
@@ -51,38 +73,66 @@ public class MainUI extends JFrame implements Runnable {
         @Override
         public void keyPressed(KeyEvent e) {
 
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                    UP = true;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    DOWN = true;
-                    break;
-                case KeyEvent.VK_LEFT:
-                    LEFT = true;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    RIGHT = true;
-                    break;
+            if (state == GameState.GAMING) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        UP = true;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        DOWN = true;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        LEFT = true;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        RIGHT = true;
+                        break;
+                }
+                return;
             }
 
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                    UP = false;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    DOWN = false;
-                    break;
-                case KeyEvent.VK_LEFT:
-                    LEFT = false;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    RIGHT = false;
-                    break;
+            if (state == GameState.GAMING) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        UP = false;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        DOWN = false;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        LEFT = false;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        RIGHT = false;
+                        break;
+                }
+                return;
+            }
+        }
+    }
+
+    class MouseAd extends MouseAdapter{
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (state == GameState.GAME_SELECT){
+                if (startGame.getHurtArea().contains(e.getX(),e.getY())){
+                    state = GameState.GAMING;
+                }
+            }
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            if (state == GameState.GAME_SELECT){
+                if (startGame.getHurtArea().contains(e.getX(),e.getY())){
+                    startGame.setImage(Medias.getImage("btn_play_click.png"));
+                }else {
+                    startGame.setImage(Medias.getImage("btn_play.png"));
+                }
             }
         }
     }
@@ -90,37 +140,46 @@ public class MainUI extends JFrame implements Runnable {
     class HB extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
-            //g.clearRect(0,0,Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT);
-            drawMap(g);
+            g.clearRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 
-            //玩家飞机的影子
-            g.drawImage(Medias.getImage("fighter_shadow.png"), myPlane.getX() + 10, myPlane.getY() + 10, this);
+            if (state == GameState.WELCOME || state == GameState.GAME_SELECT){
+                g.drawImage(Medias.getImage("startbg.jpg"),0,0,this);
+                drawGameModel(g,startGame);
+            }
 
-            //画玩家飞机
-            g.drawImage(myPlane.getCurrImage(), myPlane.getX(), myPlane.getY(), this);
+            if (state == GameState.GAMING) {
+                drawMap(g);
 
-            //画玩家飞机的子弹
-            drawMyPlaneBullets(g);
+                //玩家飞机的影子
+                g.drawImage(Medias.getImage("fighter_shadow.png"), myPlane.getX() + 10, myPlane.getY() + 10, this);
 
-            //画敌机
-            drawEnemyPlanes(g);
+                //画玩家飞机
+                g.drawImage(myPlane.getCurrImage(), myPlane.getX(), myPlane.getY(), this);
 
-            //画爆炸效果
-            drawBoom(g);
+                //画玩家飞机的子弹
+                drawMyPlaneBullets(g);
 
-            //画陨石
-            drawMeteor(g);
+                //画敌机
+                drawEnemyPlanes(g);
 
-            //画玩家飞机的血条
-            drawMyBlood(g);
+                //画爆炸效果
+                drawBoom(g);
 
-            //画敌机子弹
-            drawEnemyBullet(g);
+                //画陨石
+                drawMeteor(g);
+
+                //画玩家飞机的血条
+                drawMyBlood(g);
+
+                //画敌机子弹
+                drawEnemyBullet(g);
+            }
+            return;
         }
 
         private void drawEnemyBullet(Graphics g) {
-            for (int i = 0; i < enemyBullets.size(); i ++){
-                drawGameModel(g,enemyBullets.get(i));
+            for (int i = 0; i < enemyBullets.size(); i++) {
+                drawGameModel(g, enemyBullets.get(i));
             }
         }
 
@@ -129,17 +188,17 @@ public class MainUI extends JFrame implements Runnable {
             g.draw3DRect(
                     20,
                     Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
-                    Constants.WINDOW_WIDTH / 3 ,
+                    Constants.WINDOW_WIDTH / 3,
                     Constants.HP_HEIGHT,
                     true
             );
             g.fill3DRect(
                     20,
                     Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
-                    (int) (myPlane.getHp() * 1.0 / myPlane.getMaxHp() * Constants.WINDOW_WIDTH / 3) ,
+                    (int) (myPlane.getHp() * 1.0 / myPlane.getMaxHp() * Constants.WINDOW_WIDTH / 3),
                     Constants.HP_HEIGHT,
                     true
-                    );
+            );
 
         }
 
@@ -190,17 +249,30 @@ public class MainUI extends JFrame implements Runnable {
     public void run() {
         while (1 == 1) {
 
-            map.move();
-            generateMyBullet();
-            moveBullet();
-            moveMyPlane();
-            generateEnemyPlane();
-            moveEnemyPlane();
-            generateMeteor();
-            moveMeteor();
-            generateEnemyBullet();
-            moveEnemyBullet();
+            if(state == GameState.WELCOME){
+                startGame.setY(startGame.getY() - 2);
+                if(startGame.getY() < 300){
+                    state = GameState.GAME_SELECT;
+                }
+
+            }
+
+
+            if (state == GameState.GAMING) {
+                map.move();
+                generateMyBullet();
+                moveBullet();
+                moveMyPlane();
+                generateEnemyPlane();
+                moveEnemyPlane();
+                generateMeteor();
+                moveMeteor();
+                generateEnemyBullet();
+                moveEnemyBullet();
+            }
+
             hb.repaint();
+
 
 
             try {
@@ -212,22 +284,22 @@ public class MainUI extends JFrame implements Runnable {
     }
 
     private void moveEnemyBullet() {
-        for (int i = 0; i < enemyBullets.size() ; i ++){
+        for (int i = 0; i < enemyBullets.size(); i++) {
             Bullet bullet = enemyBullets.get(i);
-            if (bullet.moveDown() == false){
-                 enemyBullets.remove(i);
-                 i --;
-                 continue;
+            if (bullet.moveDown() == false) {
+                enemyBullets.remove(i);
+                i--;
+                continue;
             }
 
-            if(myPlane.getHurtArea().intersects(bullet.getHurtArea())){
+            if (myPlane.getHurtArea().intersects(bullet.getHurtArea())) {
                 myPlane.setHp(myPlane.getHp() - bullet.getAttack());
-                if (myPlane.getHp() <= 0){
+                if (myPlane.getHp() <= 0) {
                     System.exit(0);
                 }
 
                 enemyBullets.remove(i);
-                i --;
+                i--;
 
             }
 
@@ -236,10 +308,10 @@ public class MainUI extends JFrame implements Runnable {
     }
 
     private void generateEnemyBullet() {
-        enemyBulletGenerateInterval ++;
-        if(enemyBulletGenerateInterval > 10){
-            for (int i = 0; i < enemyPlanes.size(); i ++){
-                Factory.generateBullet(enemyPlanes.get(i),enemyBullets, BulletType.ENEMY);
+        enemyBulletGenerateInterval++;
+        if (enemyBulletGenerateInterval > 30) {
+            for (int i = 0; i < enemyPlanes.size(); i++) {
+                Factory.generateBullet(enemyPlanes.get(i), enemyBullets, BulletType.ENEMY);
             }
             enemyBulletGenerateInterval = 0;
         }
@@ -330,7 +402,7 @@ public class MainUI extends JFrame implements Runnable {
         }
     }
 
-    private void addBoom(GameModel gameModel){
+    private void addBoom(GameModel gameModel) {
         BOOM boom = new BOOM();
         boom.setX(gameModel.getX());
         boom.setY(gameModel.getY());
@@ -340,7 +412,7 @@ public class MainUI extends JFrame implements Runnable {
     private void generateMyBullet() {
         generateBulletInterval++;
         if (generateBulletInterval >= 5) {
-            Factory.generateBullet(myPlane, myPlane.getMyBullets(),BulletType.NORMAL);
+            Factory.generateBullet(myPlane, myPlane.getMyBullets(), BulletType.NORMAL);
             generateBulletInterval = 0;
         }
     }
