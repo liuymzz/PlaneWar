@@ -5,6 +5,7 @@ import entity.bullets.Bullet;
 import utils.Constants;
 import utils.Medias;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,8 @@ public class MyPlane extends Plane {
         setWidth(getWidth() / 2);
         setY(Constants.WINDOW_HEIGHT - getImage().getHeight());
         setX((Constants.WINDOW_WIDTH - getImage().getWidth()) / getMaxIndex());
-        setHp(2000);
-        setMaxHp(2000);
+        setHp(1000);
+        setMaxHp(1000);
 
     }
 
@@ -53,6 +54,10 @@ public class MyPlane extends Plane {
         return currImage;
     }
 
+    @Override
+    public Rectangle getHurtArea() {
+        return super.getHurtArea();
+    }
 
     public void moveUp() {
         setY(getY() - getSpeed());

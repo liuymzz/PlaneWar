@@ -11,7 +11,6 @@ import utils.Constants;
 import utils.Factory;
 import utils.Medias;
 
-import javax.print.attribute.standard.Media;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -33,7 +32,7 @@ public class MainUI extends JFrame implements Runnable {
     private int enemyPlanesGenerateInterval = 0;                            //敌机产生的间隔时间
     private List<BOOM> booms = new ArrayList<>();                           //存放所有的爆炸效果
     private List<Meteor> meteors = new ArrayList<>();                       //存放陨石的集合
-    private int meteotGenerateInteval = 0;                                  //陨石产生的时间间隔
+    private int meteortGenerateInterval = 0;                                  //陨石产生的时间间隔
     private List<Bullet> enemyBullets = new ArrayList<>();                  //存放敌机子弹的集合
     private int enemyBulletGenerateInterval = 0;                            //敌机子弹产生时间间隔
 
@@ -42,6 +41,7 @@ public class MainUI extends JFrame implements Runnable {
     private GameModel startGame = new GameModel();                          //开始游戏按钮
     private GameModel exit = new GameModel();                               //退出按钮
     private GameModel resume = new GameModel();                             //重新开始按钮
+    private GameModel defeat = new GameModel();                             //游戏失败
 
 
     public MainUI() {
@@ -49,17 +49,20 @@ public class MainUI extends JFrame implements Runnable {
 
         //开始游戏按钮参数
         startGame.setImage(Medias.getImage("btn_play.png"));
-        startGame.setX(150);
+        startGame.setX(Constants.WINDOW_WIDTH / 2 - startGame.getWidth() / 2);
         startGame.setY(Constants.WINDOW_HEIGHT + startGame.getHeight());
-        startGame.setSpeed(8);
         //退出按钮参数
         exit.setImage(Medias.getImage("exit.png"));
         exit.setX(350);
-        exit.setY(600);
+        exit.setY(580);
         //重新开始按钮
         resume.setImage(Medias.getImage("restart1.png"));
-        resume.setX(300);
-        resume.setY(700);
+        resume.setX(350);
+        resume.setY(650);
+        //失败
+        defeat.setImage(Medias.getImage("defeat.png"));
+        defeat.setX(Constants.WINDOW_WIDTH / 2 - defeat.getWidth() / 2);
+        defeat.setY(-defeat.getHeight());
 
 
         //游戏基础界面设置
@@ -148,6 +151,25 @@ public class MainUI extends JFrame implements Runnable {
                 }
 
             }
+
+            if (state == GameState.OVER){
+                //是否点击到退出按钮
+                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                    System.exit(0);
+                }
+
+                //是否点击到重玩按钮
+                if (resume.getHurtArea().contains(e.getX(),e.getY())){
+                    state = GameState.GAMING;
+                    myPlane = new MyPlane();
+                    enemyPlanes.clear();
+                    enemyBullets.clear();
+                    booms.clear();
+                    meteors.clear();
+                    defeat.setY(-defeat.getHeight());
+
+                }
+            }
         }
 
         @Override
@@ -169,6 +191,15 @@ public class MainUI extends JFrame implements Runnable {
                     startGame.setImage(Medias.getImage("btn_play.png"));
                 }
 
+                //退出按钮
+                if (exit.getHurtArea().contains(e.getX(),e.getY())){
+                    exit.setImage(Medias.getImage("exit_click.png"));
+                }else{
+                    exit.setImage(Medias.getImage("exit.png"));
+                }
+            }
+
+            if (state == GameState.OVER){
                 //退出按钮
                 if (exit.getHurtArea().contains(e.getX(),e.getY())){
                     exit.setImage(Medias.getImage("exit_click.png"));
@@ -218,6 +249,13 @@ public class MainUI extends JFrame implements Runnable {
                 //画敌机子弹
                 drawEnemyBullet(g);
                 return;
+            }
+
+            if (state == GameState.OVER){
+                g.drawImage(Medias.getImage("startbg.jpg"),0,0,this);
+                drawGameModel(g,defeat);
+                drawGameModel(g,exit);
+                drawGameModel(g,resume);
             }
 
         }
@@ -295,7 +333,7 @@ public class MainUI extends JFrame implements Runnable {
         while (1 == 1) {
 
             if(state == GameState.WELCOME){
-                startGame.setY(startGame.getY() - 2);
+                startGame.setY(startGame.getY() - 5);
                 if(startGame.getY() < 300){
                     state = GameState.GAME_SELECT;
                 }
@@ -314,6 +352,12 @@ public class MainUI extends JFrame implements Runnable {
                 moveMeteor();
                 generateEnemyBullet();
                 moveEnemyBullet();
+            }
+
+            if (state == GameState.OVER){
+                if(defeat.getY() < 250){
+                    defeat.setY(defeat.getY() + 3);
+                }
             }
 
             hb.repaint();
@@ -340,7 +384,7 @@ public class MainUI extends JFrame implements Runnable {
             if (myPlane.getHurtArea().intersects(bullet.getHurtArea())) {
                 myPlane.setHp(myPlane.getHp() - bullet.getAttack());
                 if (myPlane.getHp() <= 0) {
-                    System.exit(0);
+                    state = GameState.OVER;
                 }
 
                 enemyBullets.remove(i);
@@ -354,7 +398,7 @@ public class MainUI extends JFrame implements Runnable {
 
     private void generateEnemyBullet() {
         enemyBulletGenerateInterval++;
-        if (enemyBulletGenerateInterval > 30) {
+        if (enemyBulletGenerateInterval > 50) {
             for (int i = 0; i < enemyPlanes.size(); i++) {
                 Factory.generateBullet(enemyPlanes.get(i), enemyBullets, BulletType.ENEMY);
             }
@@ -373,10 +417,10 @@ public class MainUI extends JFrame implements Runnable {
     }
 
     private void generateMeteor() {
-        meteotGenerateInteval++;
-        if (meteotGenerateInteval > 40) {
+        meteortGenerateInterval++;
+        if (meteortGenerateInterval > 40) {
             Factory.generateMeteor(meteors);
-            meteotGenerateInteval = 0;
+            meteortGenerateInterval = 0;
         }
     }
 
