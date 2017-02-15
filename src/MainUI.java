@@ -43,6 +43,8 @@ public class MainUI extends JFrame implements Runnable {
     private GameModel resume = new GameModel();                             //重新开始按钮
     private GameModel defeat = new GameModel();                             //游戏失败
 
+    private int pauseInterval = 0;                                          //暂停闪烁间隔
+
 
     public MainUI() {
         ////游戏元素初始化
@@ -298,7 +300,15 @@ public class MainUI extends JFrame implements Runnable {
             }
 
             if (state == GameState.PAUSE) {
+                BufferedImage pause = Medias.getImage("pause_head.png");
                 g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
+                pauseInterval ++;
+                if(pauseInterval > 40){
+                    g.drawImage(pause,Constants.WINDOW_WIDTH / 2 - pause.getWidth() / 2,300,this);
+                    if (pauseInterval > 80){
+                        pauseInterval = 0;
+                    }
+                }
                 drawGameModel(g,resume);
                 drawGameModel(g,exit);
             }

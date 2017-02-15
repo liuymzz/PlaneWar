@@ -19,16 +19,18 @@
       <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="245" column="17" lean-forward="false" selection-start-line="245" selection-start-column="17" selection-end-line="245" selection-end-column="17" />
+            <state relative-caret-position="306">
+              <caret line="307" column="41" lean-forward="false" selection-start-line="307" selection-start-column="41" selection-end-line="307" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
                 <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+                <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+                <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -49,6 +51,19 @@
                 <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
                 <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
                 <element signature="method#main#0;class#MainUI#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Medias.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/Medias.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+              <folding>
+                <element signature="e#826#827#0" expanded="true" />
+                <element signature="e#869#870#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -177,8 +192,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -306,6 +319,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -733,12 +748,13 @@
       <workItem from="1486908601643" duration="1506000" />
       <workItem from="1486960903206" duration="11125000" />
       <workItem from="1487127658759" duration="8837000" />
-      <workItem from="1487160688487" duration="1696000" />
+      <workItem from="1487160688487" duration="2256000" />
+      <workItem from="1487168379942" duration="714000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52247000" />
+    <option name="totallyTimeSpent" value="53521000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
@@ -788,7 +804,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -876,8 +892,10 @@
             <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1007,8 +1025,10 @@
             <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1138,8 +1158,10 @@
             <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1269,8 +1291,10 @@
             <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1330,13 +1354,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/utils/Medias.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/entity/GameMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -1492,18 +1509,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/Medias.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+          <folding>
+            <element signature="e#826#827#0" expanded="true" />
+            <element signature="e#869#870#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="245" column="17" lean-forward="false" selection-start-line="245" selection-start-column="17" selection-end-line="245" selection-end-column="17" />
+        <state relative-caret-position="306">
+          <caret line="307" column="41" lean-forward="false" selection-start-line="307" selection-start-column="41" selection-end-line="307" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
             <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
