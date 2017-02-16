@@ -48,6 +48,12 @@ public class MainUI extends JFrame implements Runnable {
     private int score = 0;                                                  //飞行成绩
     private int destoryEnemyPlaneNum = 0;                                   //击毁敌机数量
 
+    private int mapRecord = 0;                                              //记录飞行距离，用来确定boss出现
+    private EnemyPlane BOSS = null;                                         //BOSS
+
+    private List<EnemyPlane> myPlanes = new ArrayList<>();                  //道具2使用
+    private boolean DJ2 = false;                                            //用于判断2键是否被按下，用来执行道具2的操作
+
 
     public MainUI() {
         ////游戏元素初始化
@@ -107,17 +113,27 @@ public class MainUI extends JFrame implements Runnable {
 
 
             if (state == GameState.GAMING) {
-                map.move();
-                score++;
-                generateMyBullet();
-                moveBullet();
-                moveMyPlane();
-                generateEnemyPlane();
-                moveEnemyPlane();
-                generateMeteor();
-                moveMeteor();
-                generateEnemyBullet();
-                moveEnemyBullet();
+                map.move();                     //地图移动
+                score++;                       //成绩增加
+                mapRecord++;                   //控制boss出现的时间点
+                generateMyBullet();             //玩家飞机发射子弹
+                moveBullet();                   //移动玩家子弹
+                moveMyPlane();                  //玩家飞机移动的控制
+                generateEnemyPlane();           //产生敌机
+                moveEnemyPlane();               //移动敌机
+                generateMeteor();               //产生陨石
+                moveMeteor();                   //移动陨石
+                generateEnemyBullet();          //产生敌机子弹
+                moveEnemyBullet();              //移动敌机子弹
+
+                generateMyPlanes();             //道具2中战机的产生
+                moveMyPlanes();                 //道具2中的战机的移动
+                DJ2();                          //道具2对敌机造成伤害的操作
+
+                if (mapRecord > 1000) {           //到了特定的时间点产生boss
+                    map.changeMapNum();
+                    mapRecord = 0;
+                }
             }
 
             if (state == GameState.OVER) {
@@ -133,6 +149,36 @@ public class MainUI extends JFrame implements Runnable {
                 Thread.sleep(16);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private void DJ2() {
+        for (int j = 0; j < myPlanes.size(); j++) {
+            if (myPlanes.get(j).getY() < Constants.WINDOW_HEIGHT / 2) {
+                for (int i = 0; i < enemyPlanes.size(); i++) {
+                    addBoom(enemyPlanes.get(i));
+                    enemyPlanes.remove(i);
+                    destoryEnemyPlaneNum++;
+                    i--;
+                }
+            }
+        }
+    }
+
+    private void generateMyPlanes() {
+        if (DJ2 == true) {
+            Factory.generateMyPlanes(myPlanes);
+        }
+    }
+
+    private void moveMyPlanes() {
+        EnemyPlane mp = null;
+        for (int i = 0; i < myPlanes.size(); i++) {
+            mp = myPlanes.get(i);
+            if (mp.move() == false) {
+                myPlanes.remove(mp);
+                i--;
             }
         }
     }
@@ -234,7 +280,7 @@ public class MainUI extends JFrame implements Runnable {
                     if (enemyPlane.getHp() < 0) {
                         //回蓝
                         myPlane.setEnergy(myPlane.getEnergy() + 100);
-                        if (myPlane.getEnergy() > myPlane.getMaxEnergy()){
+                        if (myPlane.getEnergy() > myPlane.getMaxEnergy()) {
                             myPlane.setEnergy(myPlane.getMaxEnergy());
                         }
 
@@ -259,7 +305,7 @@ public class MainUI extends JFrame implements Runnable {
                         if (meteor.getHp() < 0) {
                             //回蓝
                             myPlane.setEnergy(myPlane.getEnergy() + 200);
-                            if (myPlane.getEnergy() > myPlane.getMaxEnergy()){
+                            if (myPlane.getEnergy() > myPlane.getMaxEnergy()) {
                                 myPlane.setEnergy(myPlane.getMaxEnergy());
                             }
 
@@ -327,6 +373,8 @@ public class MainUI extends JFrame implements Runnable {
                         break;
                     case KeyEvent.VK_P:
                         state = GameState.PAUSE;
+                    case KeyEvent.VK_2:
+                        DJ2_VK();
                         break;
                 }
 
@@ -352,6 +400,13 @@ public class MainUI extends JFrame implements Runnable {
 
         }
 
+        private void DJ2_VK() {
+            if (myPlane.getHp() > myPlane.getMaxEnergy() / 2) {
+                myPlane.setEnergy(0);
+                DJ2 = true;
+            }
+        }
+
         @Override
         public void keyReleased(KeyEvent e) {
             if (state == GameState.GAMING) {
@@ -367,6 +422,8 @@ public class MainUI extends JFrame implements Runnable {
                         break;
                     case KeyEvent.VK_RIGHT:
                         RIGHT = false;
+                    case KeyEvent.VK_2:
+                        DJ2 = false;
                         break;
                 }
                 return;
@@ -528,6 +585,9 @@ public class MainUI extends JFrame implements Runnable {
 
                 //画成绩
                 drawAchievement(g);
+
+                //画道具2
+                drawDJ2(g);
                 return;
             }
 
@@ -552,8 +612,15 @@ public class MainUI extends JFrame implements Runnable {
                 }
                 drawGameModel(g, resume);
                 drawGameModel(g, exit);
+                return;
             }
 
+        }
+
+        private void drawDJ2(Graphics g) {
+            for (int i = 0; i < myPlanes.size(); i++) {
+                drawGameModel(g, myPlanes.get(i));
+            }
         }
 
         private void drawOverAchievement(Graphics g) {
@@ -657,4 +724,5 @@ public class MainUI extends JFrame implements Runnable {
             g.drawImage(buttom, 0, top.getHeight(), this);
         }
     }
+
 }

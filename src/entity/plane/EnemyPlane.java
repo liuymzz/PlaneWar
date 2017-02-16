@@ -15,9 +15,19 @@ public class EnemyPlane extends Plane {
                 return moveLeft();
             case RIGHT:
                 return moveRight();
+            case UP:
+                return moveUP();
         }
 
 
+        return true;
+    }
+
+    private boolean moveUP() {
+        setY(getY() - getSpeed());
+        if (getY() <= 0){
+            return false;
+        }
         return true;
     }
 

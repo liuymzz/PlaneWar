@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class Factory {
     private static Random random = new Random();
+    private static int myPlanesGenerateInterval = 0;           //道具2中产生战机的时间间隔控制
 
     /**
      *
@@ -83,4 +84,18 @@ public class Factory {
     }
 
 
+    //产生道具2中的友方战机
+    public static void generateMyPlanes(List<EnemyPlane> myPlanes) {
+        myPlanesGenerateInterval ++;
+        if (myPlanesGenerateInterval > 10){
+            EnemyPlane plane = new EnemyPlane();
+            plane.setImage(Medias.getImage("plane.png"));
+            plane.setSpeed(8);
+            plane.setDire(Dire.UP);
+            plane.setX(random.nextInt(Constants.WINDOW_WIDTH - plane.getWidth()));
+            plane.setY(Constants.WINDOW_HEIGHT + plane.getHeight());
+            myPlanes.add(plane);
+            myPlanesGenerateInterval = 0;
+        }
+    }
 }
