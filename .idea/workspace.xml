@@ -19,11 +19,21 @@
       <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="147" column="39" lean-forward="false" selection-start-line="147" selection-start-column="39" selection-end-line="147" selection-end-column="39" />
+            <state relative-caret-position="365">
+              <caret line="260" column="69" lean-forward="false" selection-start-line="260" selection-start-column="69" selection-end-line="260" selection-end-column="69" />
               <folding>
                 <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
-                <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
+                <element signature="method#main#0;class#MainUI#0" expanded="false" />
+                <element signature="method#run#0;class#MainUI#0" expanded="false" />
+                <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
+                <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
+                <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
+                <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
+                <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+                <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
+                <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
+                <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
+                <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
                 <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
                 <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
@@ -43,18 +53,6 @@
                 <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-                <element signature="method#run#0;class#MainUI#0" expanded="false" />
-                <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
-                <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-                <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
-                <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
-                <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
-                <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
-                <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-                <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
-                <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
-                <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
-                <element signature="method#main#0;class#MainUI#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -752,12 +750,12 @@
       <workItem from="1487127658759" duration="8837000" />
       <workItem from="1487160688487" duration="2256000" />
       <workItem from="1487168379942" duration="746000" />
-      <workItem from="1487214158074" duration="3972000" />
+      <workItem from="1487214158074" duration="5792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57525000" />
+    <option name="totallyTimeSpent" value="59345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
@@ -889,7 +887,17 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
-            <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#main#0;class#MainUI#0" expanded="false" />
+            <element signature="method#run#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
@@ -909,18 +917,6 @@
             <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#run#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#main#0;class#MainUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1024,7 +1020,17 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
-            <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#main#0;class#MainUI#0" expanded="false" />
+            <element signature="method#run#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
@@ -1044,18 +1050,6 @@
             <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#run#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#main#0;class#MainUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1159,7 +1153,17 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
-            <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#main#0;class#MainUI#0" expanded="false" />
+            <element signature="method#run#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
@@ -1179,18 +1183,6 @@
             <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#run#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#main#0;class#MainUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1294,7 +1286,17 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
-            <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#main#0;class#MainUI#0" expanded="false" />
+            <element signature="method#run#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
@@ -1314,18 +1316,6 @@
             <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#run#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#main#0;class#MainUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1529,11 +1519,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="147" column="39" lean-forward="false" selection-start-line="147" selection-start-column="39" selection-end-line="147" selection-end-column="39" />
+        <state relative-caret-position="365">
+          <caret line="260" column="69" lean-forward="false" selection-start-line="260" selection-start-column="69" selection-end-line="260" selection-end-column="69" />
           <folding>
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
-            <element signature="class#KeyAd#0;class#MainUI#0" expanded="false" />
+            <element signature="method#main#0;class#MainUI#0" expanded="false" />
+            <element signature="method#run#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
+            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
+            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
+            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyPressed#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#keyReleased#0;class#KeyAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#MouseAd#0;class#MainUI#0" expanded="false" />
@@ -1553,18 +1553,6 @@
             <element signature="method#drawMyPlaneBullets#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawGameModel#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMap#0;class#HB#0;class#MainUI#0" expanded="false" />
-            <element signature="method#run#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
-            <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
-            <element signature="method#main#0;class#MainUI#0" expanded="false" />
           </folding>
         </state>
       </provider>

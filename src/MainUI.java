@@ -88,347 +88,10 @@ public class MainUI extends JFrame implements Runnable {
         setVisible(true);
     }
 
-    class KeyAd extends KeyAdapter {
-        @Override
-        public void keyPressed(KeyEvent e) {
-
-            if (state == GameState.GAMING) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP:
-                        UP = true;
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        DOWN = true;
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        LEFT = true;
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        RIGHT = true;
-                        break;
-                    case KeyEvent.VK_P:
-                        state = GameState.PAUSE;
-                        break;
-                }
-                return;
-            }
-
-            if (state == GameState.PAUSE) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_P:
-                        state = GameState.GAMING;
-                        break;
-                }
-            }
-
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            if (state == GameState.GAMING) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP:
-                        UP = false;
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        DOWN = false;
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        LEFT = false;
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        RIGHT = false;
-                        break;
-                }
-                return;
-            }
-        }
+    public static void main(String[] args) {
+        MainUI ui = new MainUI();
+        new Thread(ui).start();
     }
-
-    class MouseAd extends MouseAdapter {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            if (state == GameState.WELCOME) {
-                //判断是否点击到退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    System.exit(0);
-                }
-            }
-
-            if (state == GameState.GAME_SELECT) {
-                //判断是否点击到开始按钮
-                if (startGame.getHurtArea().contains(e.getX(), e.getY())) {
-                    state = GameState.GAMING;
-                }
-
-                //判断是否点击到退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    System.exit(0);
-                }
-
-            }
-
-            if (state == GameState.OVER) {
-                //是否点击到退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    System.exit(0);
-                }
-
-                //是否点击到重玩按钮
-                if (resume.getHurtArea().contains(e.getX(), e.getY())) {
-                    resume();
-                }
-            }
-
-            if (state == GameState.PAUSE){
-                //是否点击到退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    System.exit(0);
-                }
-
-                //是否点击到重玩按钮
-                if (resume.getHurtArea().contains(e.getX(), e.getY())) {
-                    resume();
-                }
-            }
-
-
-        }
-
-        //重新游戏
-        private void resume() {
-            state = GameState.GAMING;
-            myPlane = new MyPlane();
-            enemyPlanes.clear();
-            enemyBullets.clear();
-            booms.clear();
-            meteors.clear();
-            score = 0;
-            destoryEnemyPlaneNum = 0;
-            defeat.setY(-defeat.getHeight());
-        }
-
-        @Override
-        public void mouseMoved(MouseEvent e) {
-            if (state == GameState.WELCOME) {
-                //退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    exit.setImage(Medias.getImage("exit_click.png"));
-                } else {
-                    exit.setImage(Medias.getImage("exit.png"));
-                }
-            }
-
-            if (state == GameState.GAME_SELECT) {
-                //开始按钮
-                if (startGame.getHurtArea().contains(e.getX(), e.getY())) {
-                    startGame.setImage(Medias.getImage("btn_play_click.png"));
-                } else {
-                    startGame.setImage(Medias.getImage("btn_play.png"));
-                }
-
-                //退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    exit.setImage(Medias.getImage("exit_click.png"));
-                } else {
-                    exit.setImage(Medias.getImage("exit.png"));
-                }
-            }
-
-            if (state == GameState.OVER) {
-                //退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    exit.setImage(Medias.getImage("exit_click.png"));
-                } else {
-                    exit.setImage(Medias.getImage("exit.png"));
-                }
-            }
-
-            if (state == GameState.PAUSE){
-                //退出按钮
-                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
-                    exit.setImage(Medias.getImage("exit_click.png"));
-                } else {
-                    exit.setImage(Medias.getImage("exit.png"));
-                }
-            }
-        }
-    }
-
-    class HB extends JPanel {
-        @Override
-        protected void paintComponent(Graphics g) {
-            g.clearRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-
-            if (state == GameState.WELCOME || state == GameState.GAME_SELECT) {
-                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
-                drawGameModel(g, startGame);
-                drawGameModel(g, exit);
-                return;
-            }
-
-            if (state == GameState.GAMING) {
-                drawMap(g);
-
-                //玩家飞机的影子
-                g.drawImage(Medias.getImage("fighter_shadow.png"), myPlane.getX() + 10, myPlane.getY() + 10, this);
-
-                //画玩家飞机
-                g.drawImage(myPlane.getCurrImage(), myPlane.getX(), myPlane.getY(), this);
-
-                //画玩家飞机的子弹
-                drawMyPlaneBullets(g);
-
-                //画敌机
-                drawEnemyPlanes(g);
-
-                //画爆炸效果
-                drawBoom(g);
-
-                //画陨石
-                drawMeteor(g);
-
-                //画玩家飞机的血条
-                drawMyBlood(g);
-
-                //画玩家的能量条
-                drawMyEnergy(g);
-
-                //画敌机子弹
-                drawEnemyBullet(g);
-
-                //画成绩
-                drawAchievement(g);
-                return;
-            }
-
-            if (state == GameState.OVER) {
-                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
-                drawGameModel(g, defeat);
-                drawGameModel(g, exit);
-                drawGameModel(g, resume);
-                drawOverAchievement(g);
-                return;
-            }
-
-            if (state == GameState.PAUSE) {
-                BufferedImage pause = Medias.getImage("pause_head.png");
-                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
-                pauseInterval ++;
-                if(pauseInterval > 40){
-                    g.drawImage(pause,Constants.WINDOW_WIDTH / 2 - pause.getWidth() / 2,300,this);
-                    if (pauseInterval > 80){
-                        pauseInterval = 0;
-                    }
-                }
-                drawGameModel(g,resume);
-                drawGameModel(g,exit);
-            }
-
-        }
-
-        private void drawOverAchievement(Graphics g) {
-            Font font = new Font(Font.MONOSPACED,Font.BOLD,20);
-            g.setFont(font);
-            g.drawString("本次成绩：", 150, 550);
-            g.drawString("飞行距离" + score,150,570);
-            g.drawString("击毁敌机"+ destoryEnemyPlaneNum +"架",150,590);
-        }
-
-        private void drawMyEnergy(Graphics g) {
-            g.setColor(Color.BLUE);
-            g.draw3DRect(
-                    20,
-                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT - Constants.HP_HEIGHT * 2,
-                    Constants.WINDOW_WIDTH / 3,
-                    Constants.HP_HEIGHT,
-                    true
-            );
-            g.fill3DRect(
-                    20,
-                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT - Constants.HP_HEIGHT * 2,
-                    (int) (myPlane.getEnergy() * 1.0 / myPlane.getMaxEnergy() * Constants.WINDOW_WIDTH / 3),
-                    Constants.HP_HEIGHT,
-                    true
-            );
-
-        }
-
-        private void drawAchievement(Graphics g) {
-            Font font = new Font(Font.MONOSPACED,Font.BOLD,20);
-            g.setFont(font);
-            g.setColor(Color.red);
-            g.drawString("您的飞行距离" + score,300,50);
-            g.drawString("击毁敌机"+ destoryEnemyPlaneNum +"架",300,70);
-        }
-
-        private void drawEnemyBullet(Graphics g) {
-            for (int i = 0; i < enemyBullets.size(); i++) {
-                drawGameModel(g, enemyBullets.get(i));
-            }
-        }
-
-        private void drawMyBlood(Graphics g) {
-            g.setColor(Color.RED);
-            g.draw3DRect(
-                    20,
-                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
-                    Constants.WINDOW_WIDTH / 3,
-                    Constants.HP_HEIGHT,
-                    true
-            );
-            g.fill3DRect(
-                    20,
-                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
-                    (int) (myPlane.getHp() * 1.0 / myPlane.getMaxHp() * Constants.WINDOW_WIDTH / 3),
-                    Constants.HP_HEIGHT,
-                    true
-            );
-
-        }
-
-        private void drawMeteor(Graphics g) {
-            for (int i = 0; i < meteors.size(); i++) {
-                Meteor meteor = meteors.get(i);
-                drawGameModel(g, meteor);
-            }
-        }
-
-        private void drawBoom(Graphics g) {
-            for (int i = 0; i < booms.size(); i++) {
-                BOOM boom = booms.get(i);
-                g.drawImage(boom.getCurrImage(), boom.getX(), boom.getY(), this);
-                if (boom.getIndex() >= boom.getMaxIndex()) {
-                    booms.remove(i);
-                    i--;
-                }
-            }
-        }
-
-        private void drawEnemyPlanes(Graphics g) {
-            for (int i = 0; i < enemyPlanes.size(); i++) {
-                drawGameModel(g, enemyPlanes.get(i));
-            }
-        }
-
-        private void drawMyPlaneBullets(Graphics g) {
-            for (int i = 0; i < myPlane.getMyBullets().size(); i++) {
-                drawGameModel(g, myPlane.getMyBullets().get(i));
-            }
-        }
-
-        private void drawGameModel(Graphics g, GameModel model) {
-            g.drawImage(model.getImage(), model.getX(), model.getY(), this);
-        }
-
-        private void drawMap(Graphics g) {
-            BufferedImage top = map.getTopImage();
-            BufferedImage buttom = map.getButtomImage();
-            g.drawImage(top, 0, 0, this);
-            g.drawImage(buttom, 0, top.getHeight(), this);
-        }
-    }
-
 
     @Override
     public void run() {
@@ -445,7 +108,7 @@ public class MainUI extends JFrame implements Runnable {
 
             if (state == GameState.GAMING) {
                 map.move();
-                score ++;
+                score++;
                 generateMyBullet();
                 moveBullet();
                 moveMyPlane();
@@ -517,10 +180,10 @@ public class MainUI extends JFrame implements Runnable {
                 continue;
             }
 
-            if (meteor.getHurtArea().intersects(myPlane.getHurtArea())){
+            if (meteor.getHurtArea().intersects(myPlane.getHurtArea())) {
                 meteors.remove(meteor);
                 addBoom(myPlane);
-                i --;
+                i--;
                 myPlane.setHp(myPlane.getHp() / 2);
             }
         }
@@ -569,7 +232,13 @@ public class MainUI extends JFrame implements Runnable {
                 if (bullet.getHurtArea().intersects(enemyPlane.getHurtArea())) {
                     enemyPlane.setHp(enemyPlane.getHp() - bullet.getAttack());
                     if (enemyPlane.getHp() < 0) {
-                        destoryEnemyPlaneNum ++;
+                        //回蓝
+                        myPlane.setEnergy(myPlane.getEnergy() + 100);
+                        if (myPlane.getEnergy() > myPlane.getMaxEnergy()){
+                            myPlane.setEnergy(myPlane.getMaxEnergy());
+                        }
+
+                        destoryEnemyPlaneNum++;
                         enemyPlanes.remove(j);
                         addBoom(enemyPlane);
 
@@ -588,6 +257,12 @@ public class MainUI extends JFrame implements Runnable {
                     if (bullet.getHurtArea().intersects(meteor.getHurtArea())) {
                         meteor.setHp(meteor.getHp() - bullet.getAttack());
                         if (meteor.getHp() < 0) {
+                            //回蓝
+                            myPlane.setEnergy(myPlane.getEnergy() + 200);
+                            if (myPlane.getEnergy() > myPlane.getMaxEnergy()){
+                                myPlane.setEnergy(myPlane.getMaxEnergy());
+                            }
+
                             meteors.remove(j);
                             addBoom(meteor);
 
@@ -604,7 +279,7 @@ public class MainUI extends JFrame implements Runnable {
 
     private void addBoom(GameModel gameModel) {
         BOOM boom = new BOOM();
-        boom.setX(gameModel.getX()+gameModel.getWidth() / 2 - boom.getImage().getWidth() / boom.getMaxIndex() / 2);
+        boom.setX(gameModel.getX() + gameModel.getWidth() / 2 - boom.getImage().getWidth() / boom.getMaxIndex() / 2);
         boom.setY(gameModel.getY());
         booms.add(boom);
     }
@@ -632,8 +307,354 @@ public class MainUI extends JFrame implements Runnable {
         }
     }
 
-    public static void main(String[] args) {
-        MainUI ui = new MainUI();
-        new Thread(ui).start();
+    class KeyAd extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+            if (state == GameState.GAMING) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        UP = true;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        DOWN = true;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        LEFT = true;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        RIGHT = true;
+                        break;
+                    case KeyEvent.VK_P:
+                        state = GameState.PAUSE;
+                        break;
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_1) {
+                    if (myPlane.getEnergy() > 100) {
+                        myPlane.setEnergy(myPlane.getEnergy() - 100);
+                        myPlane.setHp(myPlane.getHp() + myPlane.getMaxHp() / 3);
+                        if (myPlane.getHp() > myPlane.getMaxHp()) {
+                            myPlane.setHp(myPlane.getMaxHp());
+                        }
+                    }
+                }
+                return;
+            }
+
+            if (state == GameState.PAUSE) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_P:
+                        state = GameState.GAMING;
+                        break;
+                }
+            }
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (state == GameState.GAMING) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        UP = false;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        DOWN = false;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        LEFT = false;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        RIGHT = false;
+                        break;
+                }
+                return;
+            }
+        }
+    }
+
+    class MouseAd extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (state == GameState.WELCOME) {
+                //判断是否点击到退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    System.exit(0);
+                }
+            }
+
+            if (state == GameState.GAME_SELECT) {
+                //判断是否点击到开始按钮
+                if (startGame.getHurtArea().contains(e.getX(), e.getY())) {
+                    state = GameState.GAMING;
+                }
+
+                //判断是否点击到退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    System.exit(0);
+                }
+
+            }
+
+            if (state == GameState.OVER) {
+                //是否点击到退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    System.exit(0);
+                }
+
+                //是否点击到重玩按钮
+                if (resume.getHurtArea().contains(e.getX(), e.getY())) {
+                    resume();
+                }
+            }
+
+            if (state == GameState.PAUSE) {
+                //是否点击到退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    System.exit(0);
+                }
+
+                //是否点击到重玩按钮
+                if (resume.getHurtArea().contains(e.getX(), e.getY())) {
+                    resume();
+                }
+            }
+
+
+        }
+
+        //重新游戏
+        private void resume() {
+            state = GameState.GAMING;
+            myPlane = new MyPlane();
+            enemyPlanes.clear();
+            enemyBullets.clear();
+            booms.clear();
+            meteors.clear();
+            score = 0;
+            destoryEnemyPlaneNum = 0;
+            defeat.setY(-defeat.getHeight());
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            if (state == GameState.WELCOME) {
+                //退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    exit.setImage(Medias.getImage("exit_click.png"));
+                } else {
+                    exit.setImage(Medias.getImage("exit.png"));
+                }
+            }
+
+            if (state == GameState.GAME_SELECT) {
+                //开始按钮
+                if (startGame.getHurtArea().contains(e.getX(), e.getY())) {
+                    startGame.setImage(Medias.getImage("btn_play_click.png"));
+                } else {
+                    startGame.setImage(Medias.getImage("btn_play.png"));
+                }
+
+                //退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    exit.setImage(Medias.getImage("exit_click.png"));
+                } else {
+                    exit.setImage(Medias.getImage("exit.png"));
+                }
+            }
+
+            if (state == GameState.OVER) {
+                //退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    exit.setImage(Medias.getImage("exit_click.png"));
+                } else {
+                    exit.setImage(Medias.getImage("exit.png"));
+                }
+            }
+
+            if (state == GameState.PAUSE) {
+                //退出按钮
+                if (exit.getHurtArea().contains(e.getX(), e.getY())) {
+                    exit.setImage(Medias.getImage("exit_click.png"));
+                } else {
+                    exit.setImage(Medias.getImage("exit.png"));
+                }
+            }
+        }
+    }
+
+    class HB extends JPanel {
+        @Override
+        protected void paintComponent(Graphics g) {
+            g.clearRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+
+            if (state == GameState.WELCOME || state == GameState.GAME_SELECT) {
+                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
+                drawGameModel(g, startGame);
+                drawGameModel(g, exit);
+                return;
+            }
+
+            if (state == GameState.GAMING) {
+                drawMap(g);
+
+                //玩家飞机的影子
+                g.drawImage(Medias.getImage("fighter_shadow.png"), myPlane.getX() + 10, myPlane.getY() + 10, this);
+
+                //画玩家飞机
+                g.drawImage(myPlane.getCurrImage(), myPlane.getX(), myPlane.getY(), this);
+
+                //画玩家飞机的子弹
+                drawMyPlaneBullets(g);
+
+                //画敌机
+                drawEnemyPlanes(g);
+
+                //画爆炸效果
+                drawBoom(g);
+
+                //画陨石
+                drawMeteor(g);
+
+                //画玩家飞机的血条
+                drawMyBlood(g);
+
+                //画玩家的能量条
+                drawMyEnergy(g);
+
+                //画敌机子弹
+                drawEnemyBullet(g);
+
+                //画成绩
+                drawAchievement(g);
+                return;
+            }
+
+            if (state == GameState.OVER) {
+                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
+                drawGameModel(g, defeat);
+                drawGameModel(g, exit);
+                drawGameModel(g, resume);
+                drawOverAchievement(g);
+                return;
+            }
+
+            if (state == GameState.PAUSE) {
+                BufferedImage pause = Medias.getImage("pause_head.png");
+                g.drawImage(Medias.getImage("startbg.jpg"), 0, 0, this);
+                pauseInterval++;
+                if (pauseInterval > 40) {
+                    g.drawImage(pause, Constants.WINDOW_WIDTH / 2 - pause.getWidth() / 2, 300, this);
+                    if (pauseInterval > 80) {
+                        pauseInterval = 0;
+                    }
+                }
+                drawGameModel(g, resume);
+                drawGameModel(g, exit);
+            }
+
+        }
+
+        private void drawOverAchievement(Graphics g) {
+            Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
+            g.setFont(font);
+            g.drawString("本次成绩：", 150, 550);
+            g.drawString("飞行距离" + score, 150, 570);
+            g.drawString("击毁敌机" + destoryEnemyPlaneNum + "架", 150, 590);
+        }
+
+        private void drawMyEnergy(Graphics g) {
+            g.setColor(Color.BLUE);
+            g.draw3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT - Constants.HP_HEIGHT * 2,
+                    Constants.WINDOW_WIDTH / 3,
+                    Constants.HP_HEIGHT,
+                    true
+            );
+            g.fill3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT - Constants.HP_HEIGHT * 2,
+                    (int) (myPlane.getEnergy() * 1.0 / myPlane.getMaxEnergy() * Constants.WINDOW_WIDTH / 3),
+                    Constants.HP_HEIGHT,
+                    true
+            );
+
+        }
+
+        private void drawAchievement(Graphics g) {
+            Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
+            g.setFont(font);
+            g.setColor(Color.red);
+            g.drawString("您的飞行距离" + score, 300, 50);
+            g.drawString("击毁敌机" + destoryEnemyPlaneNum + "架", 300, 70);
+        }
+
+        private void drawEnemyBullet(Graphics g) {
+            for (int i = 0; i < enemyBullets.size(); i++) {
+                drawGameModel(g, enemyBullets.get(i));
+            }
+        }
+
+        private void drawMyBlood(Graphics g) {
+            g.setColor(Color.RED);
+            g.draw3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
+                    Constants.WINDOW_WIDTH / 3,
+                    Constants.HP_HEIGHT,
+                    true
+            );
+            g.fill3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT,
+                    (int) (myPlane.getHp() * 1.0 / myPlane.getMaxHp() * Constants.WINDOW_WIDTH / 3),
+                    Constants.HP_HEIGHT,
+                    true
+            );
+
+        }
+
+        private void drawMeteor(Graphics g) {
+            for (int i = 0; i < meteors.size(); i++) {
+                Meteor meteor = meteors.get(i);
+                drawGameModel(g, meteor);
+            }
+        }
+
+        private void drawBoom(Graphics g) {
+            for (int i = 0; i < booms.size(); i++) {
+                BOOM boom = booms.get(i);
+                g.drawImage(boom.getCurrImage(), boom.getX(), boom.getY(), this);
+                if (boom.getIndex() >= boom.getMaxIndex()) {
+                    booms.remove(i);
+                    i--;
+                }
+            }
+        }
+
+        private void drawEnemyPlanes(Graphics g) {
+            for (int i = 0; i < enemyPlanes.size(); i++) {
+                drawGameModel(g, enemyPlanes.get(i));
+            }
+        }
+
+        private void drawMyPlaneBullets(Graphics g) {
+            for (int i = 0; i < myPlane.getMyBullets().size(); i++) {
+                drawGameModel(g, myPlane.getMyBullets().get(i));
+            }
+        }
+
+        private void drawGameModel(Graphics g, GameModel model) {
+            g.drawImage(model.getImage(), model.getX(), model.getY(), this);
+        }
+
+        private void drawMap(Graphics g) {
+            BufferedImage top = map.getTopImage();
+            BufferedImage buttom = map.getButtomImage();
+            g.drawImage(top, 0, 0, this);
+            g.drawImage(buttom, 0, top.getHeight(), this);
+        }
     }
 }
