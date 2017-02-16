@@ -8,7 +8,7 @@ public class GameModel {
     private int y;                      //y坐标
     private int speed;                  //移动速度
     private BufferedImage image;        //图像
-    public Rectangle hurtArea = new Rectangle();          //伤害区域
+    private Rectangle hurtArea = new Rectangle();          //伤害区域
     private int height;                 //高
     private int width;                  //宽
     private int index = 0;              //当前显示图片索引

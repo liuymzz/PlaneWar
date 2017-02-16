@@ -13,6 +13,8 @@ import java.util.List;
 public class MyPlane extends Plane {
     private List<Bullet> myBullets = new ArrayList();
     private int changeInterval = 0;     //刷新的时间间隔
+    private int energy = 0;             //飞机能量值，用来使用道具
+    private int maxEnergy = 0;          //飞机最大能量值
 
 
     public MyPlane(){
@@ -27,8 +29,26 @@ public class MyPlane extends Plane {
         setHp(1000);
         setMaxHp(1000);
 
+        setEnergy(1000);
+        setMaxEnergy(1000);
+
     }
 
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public void setMaxEnergy(int maxEnergy) {
+        this.maxEnergy = maxEnergy;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
 
     public BufferedImage getCurrImage() {
         BufferedImage currImage;

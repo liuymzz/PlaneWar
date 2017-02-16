@@ -289,6 +289,9 @@ public class MainUI extends JFrame implements Runnable {
                 //画玩家飞机的血条
                 drawMyBlood(g);
 
+                //画玩家的能量条
+                drawMyEnergy(g);
+
                 //画敌机子弹
                 drawEnemyBullet(g);
 
@@ -318,6 +321,25 @@ public class MainUI extends JFrame implements Runnable {
                 drawGameModel(g,resume);
                 drawGameModel(g,exit);
             }
+
+        }
+
+        private void drawMyEnergy(Graphics g) {
+            g.setColor(Color.BLUE);
+            g.draw3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT - Constants.HP_HEIGHT * 2,
+                    Constants.WINDOW_WIDTH / 3,
+                    Constants.HP_HEIGHT,
+                    true
+            );
+            g.fill3DRect(
+                    20,
+                    Constants.WINDOW_HEIGHT - 50 - Constants.HP_HEIGHT - Constants.HP_HEIGHT * 2,
+                    (int) (myPlane.getEnergy() * 1.0 / myPlane.getMaxEnergy() * Constants.WINDOW_WIDTH / 3),
+                    Constants.HP_HEIGHT,
+                    true
+            );
 
         }
 
