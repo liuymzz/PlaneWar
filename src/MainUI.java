@@ -45,6 +45,9 @@ public class MainUI extends JFrame implements Runnable {
 
     private int pauseInterval = 0;                                          //暂停闪烁间隔
 
+    private int score = 0;                                                  //飞行成绩
+    private int destoryEnemyPlaneNum = 0;                                   //击毁敌机数量
+
 
     public MainUI() {
         ////游戏元素初始化
@@ -288,6 +291,9 @@ public class MainUI extends JFrame implements Runnable {
 
                 //画敌机子弹
                 drawEnemyBullet(g);
+
+                //画成绩
+                drawaChievement(g);
                 return;
             }
 
@@ -313,6 +319,13 @@ public class MainUI extends JFrame implements Runnable {
                 drawGameModel(g,exit);
             }
 
+        }
+
+        private void drawaChievement(Graphics g) {
+            Font font = new Font(Font.MONOSPACED,Font.BOLD,20);
+            g.setFont(font);
+            g.drawString("您的飞行距离" + score,300,50);
+            g.drawString("击毁敌机"+ destoryEnemyPlaneNum +"架",300,70);
         }
 
         private void drawEnemyBullet(Graphics g) {
@@ -398,6 +411,7 @@ public class MainUI extends JFrame implements Runnable {
 
             if (state == GameState.GAMING) {
                 map.move();
+                score ++;
                 generateMyBullet();
                 moveBullet();
                 moveMyPlane();
@@ -521,6 +535,7 @@ public class MainUI extends JFrame implements Runnable {
                 if (bullet.getHurtArea().intersects(enemyPlane.getHurtArea())) {
                     enemyPlane.setHp(enemyPlane.getHp() - bullet.getAttack());
                     if (enemyPlane.getHp() < 0) {
+                        destoryEnemyPlaneNum ++;
                         enemyPlanes.remove(j);
                         addBoom(enemyPlane);
 
@@ -555,7 +570,7 @@ public class MainUI extends JFrame implements Runnable {
 
     private void addBoom(GameModel gameModel) {
         BOOM boom = new BOOM();
-        boom.setX(gameModel.getX());
+        boom.setX(gameModel.getX()+gameModel.getWidth() / 2 - boom.getImage().getWidth() / boom.getMaxIndex() / 2);
         boom.setY(gameModel.getY());
         booms.add(boom);
     }

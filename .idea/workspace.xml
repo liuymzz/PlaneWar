@@ -19,8 +19,8 @@
       <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="475" column="49" lean-forward="false" selection-start-line="475" selection-start-column="49" selection-end-line="475" selection-end-column="49" />
+            <state relative-caret-position="265">
+              <caret line="572" column="110" lean-forward="false" selection-start-line="572" selection-start-column="110" selection-end-line="572" selection-end-column="110" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
@@ -33,6 +33,7 @@
                 <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
                 <element signature="class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
+                <element signature="method#drawaChievement#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -48,7 +49,6 @@
                 <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
                 <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
                 <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-                <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
                 <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
                 <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
                 <element signature="method#main#0;class#MainUI#0" expanded="false" />
@@ -751,21 +751,21 @@
       <workItem from="1487127658759" duration="8837000" />
       <workItem from="1487160688487" duration="2256000" />
       <workItem from="1487168379942" duration="746000" />
-      <workItem from="1487214158074" duration="505000" />
+      <workItem from="1487214158074" duration="2371000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54058000" />
+    <option name="totallyTimeSpent" value="55924000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -900,6 +900,7 @@
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawaChievement#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -915,7 +916,6 @@
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#main#0;class#MainUI#0" expanded="false" />
@@ -1034,6 +1034,7 @@
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawaChievement#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1049,7 +1050,6 @@
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#main#0;class#MainUI#0" expanded="false" />
@@ -1168,6 +1168,7 @@
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawaChievement#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1183,7 +1184,6 @@
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#main#0;class#MainUI#0" expanded="false" />
@@ -1302,6 +1302,7 @@
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawaChievement#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1317,7 +1318,6 @@
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#main#0;class#MainUI#0" expanded="false" />
@@ -1528,8 +1528,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="475" column="49" lean-forward="false" selection-start-line="475" selection-start-column="49" selection-end-line="475" selection-end-column="49" />
+        <state relative-caret-position="265">
+          <caret line="572" column="110" lean-forward="false" selection-start-line="572" selection-start-column="110" selection-end-line="572" selection-end-column="110" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
@@ -1542,6 +1542,7 @@
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#drawaChievement#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1557,7 +1558,6 @@
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#addBoom#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveMyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#main#0;class#MainUI#0" expanded="false" />
