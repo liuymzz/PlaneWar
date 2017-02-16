@@ -19,8 +19,8 @@
       <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="307" column="41" lean-forward="false" selection-start-line="307" selection-start-column="41" selection-end-line="307" selection-end-column="41" />
+            <state relative-caret-position="314">
+              <caret line="475" column="49" lean-forward="false" selection-start-line="475" selection-start-column="49" selection-end-line="475" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
@@ -31,6 +31,8 @@
                 <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
                 <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+                <element signature="class#HB#0;class#MainUI#0" expanded="false" />
+                <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
                 <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -42,7 +44,6 @@
                 <element signature="method#run#0;class#MainUI#0" expanded="false" />
                 <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
                 <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-                <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
                 <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
                 <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
                 <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
@@ -59,8 +60,8 @@
       <file leaf-file-name="Medias.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/Medias.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+            <state relative-caret-position="408">
+              <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
               <folding>
                 <element signature="e#826#827#0" expanded="true" />
                 <element signature="e#869#870#0" expanded="true" />
@@ -192,6 +193,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -318,9 +322,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -749,15 +750,16 @@
       <workItem from="1486960903206" duration="11125000" />
       <workItem from="1487127658759" duration="8837000" />
       <workItem from="1487160688487" duration="2256000" />
-      <workItem from="1487168379942" duration="714000" />
+      <workItem from="1487168379942" duration="746000" />
+      <workItem from="1487214158074" duration="505000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53521000" />
+    <option name="totallyTimeSpent" value="54058000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="22" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -896,6 +898,8 @@
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -907,7 +911,6 @@
             <element signature="method#run#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
@@ -1029,6 +1032,8 @@
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1040,7 +1045,6 @@
             <element signature="method#run#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
@@ -1162,6 +1166,8 @@
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1173,7 +1179,6 @@
             <element signature="method#run#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
@@ -1295,6 +1300,8 @@
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1306,7 +1313,6 @@
             <element signature="method#run#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />
@@ -1511,8 +1517,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/Medias.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+        <state relative-caret-position="408">
+          <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
           <folding>
             <element signature="e#826#827#0" expanded="true" />
             <element signature="e#869#870#0" expanded="true" />
@@ -1522,8 +1528,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="307" column="41" lean-forward="false" selection-start-line="307" selection-start-column="41" selection-end-line="307" selection-end-column="41" />
+        <state relative-caret-position="314">
+          <caret line="475" column="49" lean-forward="false" selection-start-line="475" selection-start-column="49" selection-end-line="475" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MainUI#0;class#MainUI#0" expanded="false" />
@@ -1534,6 +1540,8 @@
             <element signature="method#mouseClicked#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#resume#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
             <element signature="method#mouseMoved#0;class#MouseAd#0;class#MainUI#0" expanded="false" />
+            <element signature="class#HB#0;class#MainUI#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawEnemyBullet#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMyBlood#0;class#HB#0;class#MainUI#0" expanded="false" />
             <element signature="method#drawMeteor#0;class#HB#0;class#MainUI#0" expanded="false" />
@@ -1545,7 +1553,6 @@
             <element signature="method#run#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyBullet#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyBullet#0;class#MainUI#0" expanded="false" />
-            <element signature="method#moveMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateMeteor#0;class#MainUI#0" expanded="false" />
             <element signature="method#moveEnemyPlane#0;class#MainUI#0" expanded="false" />
             <element signature="method#generateEnemyPlane#0;class#MainUI#0" expanded="false" />

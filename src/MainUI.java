@@ -466,6 +466,14 @@ public class MainUI extends JFrame implements Runnable {
             if (meteor.move() == false) {
                 meteors.remove(i);
                 i--;
+                continue;
+            }
+
+            if (meteor.getHurtArea().intersects(myPlane.getHurtArea())){
+                meteors.remove(meteor);
+                addBoom(myPlane);
+                i --;
+                myPlane.setHp(myPlane.getHp() / 2);
             }
         }
     }
