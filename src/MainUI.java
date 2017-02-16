@@ -203,6 +203,8 @@ public class MainUI extends JFrame implements Runnable {
             enemyBullets.clear();
             booms.clear();
             meteors.clear();
+            score = 0;
+            destoryEnemyPlaneNum = 0;
             defeat.setY(-defeat.getHeight());
         }
 
@@ -296,7 +298,7 @@ public class MainUI extends JFrame implements Runnable {
                 drawEnemyBullet(g);
 
                 //画成绩
-                drawaChievement(g);
+                drawAchievement(g);
                 return;
             }
 
@@ -305,6 +307,7 @@ public class MainUI extends JFrame implements Runnable {
                 drawGameModel(g, defeat);
                 drawGameModel(g, exit);
                 drawGameModel(g, resume);
+                drawOverAchievement(g);
                 return;
             }
 
@@ -322,6 +325,14 @@ public class MainUI extends JFrame implements Runnable {
                 drawGameModel(g,exit);
             }
 
+        }
+
+        private void drawOverAchievement(Graphics g) {
+            Font font = new Font(Font.MONOSPACED,Font.BOLD,20);
+            g.setFont(font);
+            g.drawString("本次成绩：", 150, 550);
+            g.drawString("飞行距离" + score,150,570);
+            g.drawString("击毁敌机"+ destoryEnemyPlaneNum +"架",150,590);
         }
 
         private void drawMyEnergy(Graphics g) {
@@ -343,9 +354,10 @@ public class MainUI extends JFrame implements Runnable {
 
         }
 
-        private void drawaChievement(Graphics g) {
+        private void drawAchievement(Graphics g) {
             Font font = new Font(Font.MONOSPACED,Font.BOLD,20);
             g.setFont(font);
+            g.setColor(Color.red);
             g.drawString("您的飞行距离" + score,300,50);
             g.drawString("击毁敌机"+ destoryEnemyPlaneNum +"架",300,70);
         }
