@@ -54,6 +54,8 @@ public class MainUI extends JFrame implements Runnable {
     private List<EnemyPlane> myPlanes = new ArrayList<>();                  //道具2使用
     private boolean DJ2 = false;                                            //用于判断2键是否被按下，用来执行道具2的操作
 
+    private boolean IsTheBest = false;                                      //用来判断是否获得历史最佳
+
 
     public MainUI() {
         ////游戏元素初始化
@@ -196,6 +198,7 @@ public class MainUI extends JFrame implements Runnable {
                 myPlane.setHp(myPlane.getHp() - bullet.getAttack());
                 if (myPlane.getHp() <= 0) {
                     state = GameState.OVER;
+                    zuijia();                          //判断是否获得历史最佳
                 }
 
                 enemyBullets.remove(i);
@@ -204,6 +207,20 @@ public class MainUI extends JFrame implements Runnable {
             }
 
 
+        }
+    }
+
+    //用来判断是否获得历史最佳
+    private void zuijia() {
+        int mileage = Factory.getMaxScore("mileage");
+        int destory_enemys = Factory.getMaxScore("destory_enemys");
+        if (score > mileage){
+            Factory.setMaxScore(score,"mileage");
+            IsTheBest = true;
+        }
+        if (destoryEnemyPlaneNum > destory_enemys){
+            Factory.setMaxScore(destoryEnemyPlaneNum,"destory_enemys");
+            IsTheBest = true;
         }
     }
 
@@ -588,6 +605,7 @@ public class MainUI extends JFrame implements Runnable {
 
                 //画道具2
                 drawDJ2(g);
+
                 return;
             }
 
@@ -597,6 +615,7 @@ public class MainUI extends JFrame implements Runnable {
                 drawGameModel(g, exit);
                 drawGameModel(g, resume);
                 drawOverAchievement(g);
+                drawHistory(g);                     //绘制历史
                 return;
             }
 
@@ -615,6 +634,16 @@ public class MainUI extends JFrame implements Runnable {
                 return;
             }
 
+        }
+
+        private void drawHistory(Graphics g) {
+            g.drawString("历史最佳：",150,630);
+            g.drawString("飞行距离："+ Factory.getMaxScore("mileage"),150,650);
+            g.drawString("击毁敌机："+ Factory.getMaxScore("destory_enemys"),150,670);
+            if(IsTheBest){
+                g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+                g.drawString("恭喜您是历史最佳！",150,690);
+            }
         }
 
         private void drawDJ2(Graphics g) {

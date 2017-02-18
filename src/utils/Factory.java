@@ -7,7 +7,13 @@ import entity.plane.Plane;
 import enums.BulletType;
 import enums.Dire;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 public class Factory {
@@ -96,6 +102,60 @@ public class Factory {
             plane.setY(Constants.WINDOW_HEIGHT + plane.getHeight());
             myPlanes.add(plane);
             myPlanesGenerateInterval = 0;
+        }
+    }
+
+
+    /**
+     *
+     * @param type 要查询的成绩的参数
+     * @return  得到的成绩
+     */
+    public static int getMaxScore(String type){
+        int max = 0;
+        File file = null;
+        FileReader fileReader = null;
+        try {
+            file = new File("conf/recored.properties");
+            fileReader = new FileReader(file);
+            Properties properties = new Properties();
+            properties.load(fileReader);
+            max = Integer.parseInt(properties.getProperty(type));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return max;
+    }
+
+    /**
+     * 记录本地最佳成绩
+     * @param score 里程
+     * @param type 记录的参数
+     */
+    public static void setMaxScore(int score, String type){
+        File file = new File("conf/recored.properties");
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(file);
+            Properties properties = new Properties();
+            properties.load(fileReader);
+            properties.setProperty(type,score + "");
+            properties.store(new FileWriter(file),"");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
