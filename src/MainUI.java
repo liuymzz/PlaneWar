@@ -10,7 +10,6 @@ import enums.GameState;
 import utils.Constants;
 import utils.Factory;
 import utils.Medias;
-import utils.SoundUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -199,7 +198,6 @@ public class MainUI extends JFrame implements Runnable {
                 myPlane.setHp(myPlane.getHp() - bullet.getAttack());
                 if (myPlane.getHp() <= 0) {
                     state = GameState.OVER;
-                    SoundUtils.Play(Medias.getAudios("game_over.wav"),false);
                     zuijia();                          //判断是否获得历史最佳
                 }
 
@@ -216,12 +214,12 @@ public class MainUI extends JFrame implements Runnable {
     private void zuijia() {
         int mileage = Factory.getMaxScore("mileage");
         int destory_enemys = Factory.getMaxScore("destory_enemys");
-        if (score > mileage) {
-            Factory.setMaxScore(score, "mileage");
+        if (score > mileage){
+            Factory.setMaxScore(score,"mileage");
             IsTheBest = true;
         }
-        if (destoryEnemyPlaneNum > destory_enemys) {
-            Factory.setMaxScore(destoryEnemyPlaneNum, "destory_enemys");
+        if (destoryEnemyPlaneNum > destory_enemys){
+            Factory.setMaxScore(destoryEnemyPlaneNum,"destory_enemys");
             IsTheBest = true;
         }
     }
@@ -347,12 +345,6 @@ public class MainUI extends JFrame implements Runnable {
         boom.setX(gameModel.getX() + gameModel.getWidth() / 2 - boom.getImage().getWidth() / boom.getMaxIndex() / 2);
         boom.setY(gameModel.getY());
         booms.add(boom);
-        if (gameModel instanceof EnemyPlane){
-            SoundUtils.Play(Medias.getAudios("explosion_enemy.wav"),false);
-        }
-        if (gameModel instanceof Meteor){
-            SoundUtils.Play(Medias.getAudios("explosion_asteroid.wav"),false);
-        }
     }
 
     private void generateMyBullet() {
@@ -360,8 +352,6 @@ public class MainUI extends JFrame implements Runnable {
         if (generateBulletInterval >= 5) {
             Factory.generateBullet(myPlane, myPlane.getMyBullets(), BulletType.NORMAL);
             generateBulletInterval = 0;
-            SoundUtils.Play(Medias.getAudios("bullet.wav"), false);                 //播放发射子弹的声音
-
         }
     }
 
@@ -461,7 +451,6 @@ public class MainUI extends JFrame implements Runnable {
     class MouseAd extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            SoundUtils.Play(Medias.getAudios("click.wav"),false);
             if (state == GameState.WELCOME) {
                 //判断是否点击到退出按钮
                 if (exit.getHurtArea().contains(e.getX(), e.getY())) {
@@ -648,12 +637,12 @@ public class MainUI extends JFrame implements Runnable {
         }
 
         private void drawHistory(Graphics g) {
-            g.drawString("历史最佳：", 150, 630);
-            g.drawString("飞行距离：" + Factory.getMaxScore("mileage"), 150, 650);
-            g.drawString("击毁敌机：" + Factory.getMaxScore("destory_enemys"), 150, 670);
-            if (IsTheBest) {
+            g.drawString("历史最佳：",150,630);
+            g.drawString("飞行距离："+ Factory.getMaxScore("mileage"),150,650);
+            g.drawString("击毁敌机："+ Factory.getMaxScore("destory_enemys"),150,670);
+            if(IsTheBest){
                 g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-                g.drawString("恭喜您是历史最佳！", 150, 690);
+                g.drawString("恭喜您是历史最佳！",150,690);
             }
         }
 
