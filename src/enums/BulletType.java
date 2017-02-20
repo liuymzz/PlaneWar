@@ -1,5 +1,5 @@
 package enums;
 
 public enum BulletType {
-    NORMAL,TRACE,ENEMY
+    NORMAL,TRACE,ENEMY,BOSS
 }

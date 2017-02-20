@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -28,11 +27,12 @@ public class Factory {
     public static void generateBullet(Plane plane , List<Bullet> list, BulletType bulletType){
         Bullet bullet = new Bullet();
         bullet.setY(plane.getY() - 2);
-        if (bulletType == BulletType.ENEMY){
+        if (bulletType == BulletType.ENEMY || bulletType == BulletType.BOSS){
             bullet.setImage(Medias.getImage("m9.png"));
             bullet.setSpeed(8);
             bullet.setY(plane.getY() + plane.getHeight() - 1);
         }
+
         bullet.setX(plane.getX() + (plane.getWidth() / 2) - bullet.getWidth() / 2);     //子弹的x坐标等于飞机的x坐标加上他宽度的一半再减去子弹宽度的一半
         bullet.setAttack(80);
         list.add(bullet);

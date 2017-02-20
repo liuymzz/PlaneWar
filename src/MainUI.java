@@ -5,7 +5,9 @@ import entity.Meteor;
 import entity.bullets.Bullet;
 import entity.plane.EnemyPlane;
 import entity.plane.MyPlane;
+import entity.plane.Plane;
 import enums.BulletType;
+import enums.Dire;
 import enums.GameState;
 import utils.Constants;
 import utils.Factory;
@@ -58,7 +60,9 @@ public class MainUI extends JFrame implements Runnable {
     private boolean IsTheBest = false;                                      //用来判断是否获得历史最佳
 
     private int DEADtime = 0;                                               //死亡时间，展示死亡后战机爆炸的效果
-    private int addBOOMSInterval = 0;                                        //死亡时间产生爆炸效果的时间间隔
+    private int addBOOMSInterval = 0;                                       //死亡时间产生爆炸效果的时间间隔
+
+    private int BOSS_BOOM_interval = 0;                                     //boss爆炸时间间隔
 
 
     public MainUI() {
@@ -121,11 +125,9 @@ public class MainUI extends JFrame implements Runnable {
             if (state == GameState.GAMING) {
                 map.move();                     //地图移动
                 score++;                       //成绩增加
-                mapRecord++;                   //控制boss出现的时间点
                 generateMyBullet();             //玩家飞机发射子弹
                 moveBullet();                   //移动玩家子弹
                 moveMyPlane();                  //玩家飞机移动的控制
-                generateEnemyPlane();           //产生敌机
                 moveEnemyPlane();               //移动敌机
                 generateMeteor();               //产生陨石
                 moveMeteor();                   //移动陨石
@@ -136,14 +138,22 @@ public class MainUI extends JFrame implements Runnable {
                 moveMyPlanes();                 //道具2中的战机的移动
                 DJ2();                          //道具2对敌机造成伤害的操作
 
+                if (BOSS == null) {
+                    generateEnemyPlane();           //产生敌机
+                    mapRecord++;                   //控制boss出现的时间点
+                }
+
+
                 if (mapRecord > 1000) {           //到了特定的时间点产生boss
-                    map.changeMapNum();
+                    initBOSS();
                     mapRecord = 0;
                 }
+
+                moveBOSS();
             }
 
             if (state == GameState.DEAD) {
-                DEADtime ++;
+                DEADtime++;
                 map.move();
                 moveEnemyPlane();
                 moveEnemyBullet();
@@ -155,7 +165,25 @@ public class MainUI extends JFrame implements Runnable {
                     DEADtime = 0;
                 }
                 if (DEADtime < 400) {
-                    addBOOMs();
+                    addBOOMs(myPlane);
+                }
+            }
+
+            if (state == GameState.BOSS_BOOM){
+                BOSS_BOOM_interval ++;
+                map.move();
+                moveEnemyPlane();
+                moveEnemyBullet();
+                moveMeteor();
+                moveMyPlanes();
+                if (BOSS_BOOM_interval > 500){
+                    state = GameState.GAMING;
+                    map.changeMapNum();
+                    BOSS_BOOM_interval = 0;
+                    BOSS = null;
+                }
+                if (BOSS_BOOM_interval < 400){
+                    addBOOMs(BOSS);
                 }
             }
 
@@ -176,13 +204,41 @@ public class MainUI extends JFrame implements Runnable {
         }
     }
 
-    private void addBOOMs() {
-        addBOOMSInterval ++;
+    private void moveBOSS() {
+        if (BOSS != null) {
+            BOSS.move();
+            if (BOSS.getDire() == Dire.DOWN && BOSS.getY() > 0) {
+                BOSS.setDire(Dire.LEFT);
+            }
+
+            if (BOSS.getDire() == Dire.LEFT && BOSS.getX() <= 0) {
+                BOSS.setDire(Dire.RIGHT);
+            }
+
+            if (BOSS.getDire() == Dire.RIGHT && BOSS.getX() > Constants.WINDOW_WIDTH - BOSS.getWidth()) {
+                BOSS.setDire(Dire.LEFT);
+            }
+        }
+    }
+
+    private void initBOSS() {
+        BOSS = new EnemyPlane();
+        BOSS.setImage(Medias.getImage("boss" + map.getMapNum() + ".png"));
+        BOSS.setMaxHp(10000);
+        BOSS.setHp(10000);
+        BOSS.setDire(Dire.DOWN);
+        BOSS.setSpeed(4);
+        BOSS.setX(Constants.WINDOW_WIDTH / 2 - BOSS.getWidth() / 2);
+        BOSS.setY(-BOSS.getHeight());
+    }
+
+    private void addBOOMs(Plane plane) {
+        addBOOMSInterval++;
 
         if (addBOOMSInterval > 30) {
             BOOM boom = new BOOM();
-            boom.setX(Factory.random(myPlane.getX() + myPlane.getWidth() + 100 - (myPlane.getX() - 100)) + myPlane.getX() - 100);
-            boom.setY(Factory.random(myPlane.getY() + myPlane.getHeight() + 100 - (myPlane.getY() - 100)) + myPlane.getY() - 100);
+            boom.setX(Factory.random(plane.getX() + plane.getWidth() + 100 - (plane.getX() - 100)) + plane.getX() - 100);
+            boom.setY(Factory.random(plane.getY() + plane.getHeight() + 100 - (plane.getY() - 100)) + plane.getY() - 100);
             booms.add(boom);
             SoundUtils.Play(Medias.getAudios("explosion_enemy.wav"), false);
             addBOOMSInterval = 0;
@@ -198,6 +254,10 @@ public class MainUI extends JFrame implements Runnable {
                     enemyPlanes.remove(i);
                     destoryEnemyPlaneNum++;
                     i--;
+                }
+
+                if (BOSS != null){
+                    BOSS.setHp(BOSS.getHp() - 300);
                 }
             }
         }
@@ -265,6 +325,9 @@ public class MainUI extends JFrame implements Runnable {
             for (int i = 0; i < enemyPlanes.size(); i++) {
                 Factory.generateBullet(enemyPlanes.get(i), enemyBullets, BulletType.ENEMY);
             }
+            if (BOSS != null) {
+                Factory.generateBullet(BOSS, enemyBullets, BulletType.BOSS);
+            }
             enemyBulletGenerateInterval = 0;
         }
     }
@@ -278,7 +341,7 @@ public class MainUI extends JFrame implements Runnable {
                 continue;
             }
 
-            if (meteor.getHurtArea().intersects(myPlane.getHurtArea())) {
+            if (meteor.getHurtArea().intersects(myPlane.getHurtArea()) && state == GameState.GAMING) {
                 meteors.remove(meteor);
                 addBoom(myPlane);
                 i--;
@@ -367,7 +430,21 @@ public class MainUI extends JFrame implements Runnable {
                         }
                         bullets.remove(i);
                         i--;
+                        isRemove = true;
                         break;
+                    }
+                }
+            }
+
+            //BOSS
+            if (BOSS != null && isRemove == false){
+                if (BOSS.getHurtArea().intersects(bullet.getHurtArea())){
+                    BOSS.setHp(BOSS.getHp() - bullet.getAttack());
+                    bullets.remove(i);
+                    i--;
+                    isRemove = true;
+                    if (BOSS.getHp() < 0){
+                        state = GameState.BOSS_BOOM;
                     }
                 }
             }
@@ -650,10 +727,16 @@ public class MainUI extends JFrame implements Runnable {
                 //画道具2
                 drawDJ2(g);
 
+                //画boss相关
+                if (BOSS != null) {
+                    drawGameModel(g, BOSS);
+                    drawBOSSBlood(g);
+                }
+
                 return;
             }
 
-            if (state == GameState.DEAD){
+            if (state == GameState.DEAD || state == GameState.BOSS_BOOM) {
                 drawMap(g);
                 //画敌机
                 drawEnemyPlanes(g);
@@ -672,6 +755,13 @@ public class MainUI extends JFrame implements Runnable {
 
                 //画敌机子弹
                 drawEnemyBullet(g);
+
+                if (myPlane.getHp() > 0){
+                    //画玩家飞机
+                    g.drawImage(myPlane.getCurrImage(), myPlane.getX(), myPlane.getY(), this);
+                    //玩家飞机的影子
+                    g.drawImage(Medias.getImage("fighter_shadow.png"), myPlane.getX() + 10, myPlane.getY() + 10, this);
+                }
 
                 return;
             }
@@ -701,6 +791,24 @@ public class MainUI extends JFrame implements Runnable {
                 return;
             }
 
+        }
+
+        private void drawBOSSBlood(Graphics g) {
+            g.setColor(Color.RED);
+            g.draw3DRect(
+                    20,
+                    20,
+                    Constants.WINDOW_WIDTH / 3,
+                    Constants.HP_HEIGHT,
+                    true
+            );
+            g.fill3DRect(
+                    20,
+                    20,
+                    (int) (BOSS.getHp() * 1.0 / BOSS.getMaxHp() * Constants.WINDOW_WIDTH / 3),
+                    Constants.HP_HEIGHT,
+                    true
+            );
         }
 
         private void drawHistory(Graphics g) {

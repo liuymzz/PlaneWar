@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public class GameMap {
     private int index = 1;
     private int gapY = 1;           //两张图片之间的y的值
-    private int mapNum = 1;
+    private int mapNum = 1;         //地图序号
 
 
     public BufferedImage getTopImage(){
@@ -55,5 +55,13 @@ public class GameMap {
         if(mapNum > 3){
             mapNum = 1;
         }
+    }
+
+    public int getMapNum() {
+        return mapNum;
+    }
+
+    public void setMapNum(int mapNum) {
+        this.mapNum = mapNum;
     }
 }
