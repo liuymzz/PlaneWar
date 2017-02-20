@@ -17,17 +17,15 @@ import java.util.Random;
 
 public class Factory {
     private static Random random = new Random();
-    private static int myPlanesGenerateInterval = 0;           //道具2中产生战机的时间间隔控制
 
     /**
-     *
      * @param plane 为哪架飞机生成子弹
-     * @param list 存放子弹的集合
+     * @param list  存放子弹的集合
      */
-    public static void generateBullet(Plane plane , List<Bullet> list, BulletType bulletType){
+    public static void generateBullet(Plane plane, List<Bullet> list, BulletType bulletType) {
         Bullet bullet = new Bullet();
         bullet.setY(plane.getY() - 2);
-        if (bulletType == BulletType.ENEMY || bulletType == BulletType.BOSS){
+        if (bulletType == BulletType.ENEMY || bulletType == BulletType.BOSS) {
             bullet.setImage(Medias.getImage("m9.png"));
             bullet.setSpeed(8);
             bullet.setY(plane.getY() + plane.getHeight() - 1);
@@ -38,11 +36,11 @@ public class Factory {
         list.add(bullet);
     }
 
-    public static void generateEnemyPlane(List<EnemyPlane> list){
+    public static void generateEnemyPlane(List<EnemyPlane> list) {
 
         int ran = random.nextInt(100);
         EnemyPlane plane = new EnemyPlane();
-        if (ran < 20){
+        if (ran < 20) {
             plane.setImage(Medias.getImage("enemy4.png"));
             plane.setDire(Dire.LEFT);
             plane.setX(Constants.WINDOW_WIDTH + plane.getWidth());
@@ -54,7 +52,7 @@ public class Factory {
             return;
         }
 
-        if(ran < 40){
+        if (ran < 40) {
             plane.setImage(Medias.getImage("enemy1.png"));
             plane.setDire(Dire.RIGHT);
             plane.setX(-plane.getWidth());
@@ -66,7 +64,7 @@ public class Factory {
             return;
         }
 
-        if(ran < 100){
+        if (ran < 100) {
             plane.setImage(Medias.getImage("enemy3.png"));
             plane.setDire(Dire.DOWN);
             plane.setX(random.nextInt(Constants.WINDOW_WIDTH - plane.getWidth() * 2) + plane.getWidth());
@@ -79,10 +77,9 @@ public class Factory {
         }
 
 
-
     }
 
-    public static void generateMeteor(List<Meteor> meteors){
+    public static void generateMeteor(List<Meteor> meteors) {
         Meteor meteor = new Meteor();
         meteor.setX(random.nextInt(Constants.WINDOW_WIDTH) - meteor.getWidth());
         meteor.setY(-meteor.getHeight());
@@ -92,26 +89,24 @@ public class Factory {
 
     //产生道具2中的友方战机
     public static void generateMyPlanes(List<EnemyPlane> myPlanes) {
-        myPlanesGenerateInterval ++;
-        if (myPlanesGenerateInterval > 10){
-            EnemyPlane plane = new EnemyPlane();
+        EnemyPlane plane = null;
+        for (int i = 0; i < 10; i++) {
+            plane = new EnemyPlane();
             plane.setImage(Medias.getImage("plane.png"));
             plane.setSpeed(8);
             plane.setDire(Dire.UP);
             plane.setX(random.nextInt(Constants.WINDOW_WIDTH - plane.getWidth()));
-            plane.setY(Constants.WINDOW_HEIGHT + plane.getHeight());
+            plane.setY(random.nextInt(Constants.WINDOW_HEIGHT) + Constants.WINDOW_HEIGHT);
             myPlanes.add(plane);
-            myPlanesGenerateInterval = 0;
         }
     }
 
 
     /**
-     *
      * @param type 要查询的成绩的参数
-     * @return  得到的成绩
+     * @return 得到的成绩
      */
-    public static int getMaxScore(String type){
+    public static int getMaxScore(String type) {
         int max = 0;
         File file = null;
         FileReader fileReader = null;
@@ -123,7 +118,7 @@ public class Factory {
             max = Integer.parseInt(properties.getProperty(type));
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 fileReader.close();
             } catch (IOException e) {
@@ -136,21 +131,22 @@ public class Factory {
 
     /**
      * 记录本地最佳成绩
+     *
      * @param score 里程
-     * @param type 记录的参数
+     * @param type  记录的参数
      */
-    public static void setMaxScore(int score, String type){
+    public static void setMaxScore(int score, String type) {
         File file = new File("conf/recored.properties");
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(file);
             Properties properties = new Properties();
             properties.load(fileReader);
-            properties.setProperty(type,score + "");
-            properties.store(new FileWriter(file),"");
+            properties.setProperty(type, score + "");
+            properties.store(new FileWriter(file), "");
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 fileReader.close();
             } catch (IOException e) {
@@ -161,10 +157,11 @@ public class Factory {
 
     /**
      * 获得一个从0至value的随机数
+     *
      * @param value
      * @return
      */
-    public static int random(int value){
+    public static int random(int value) {
         return random.nextInt(value);
     }
 }

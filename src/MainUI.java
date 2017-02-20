@@ -55,7 +55,6 @@ public class MainUI extends JFrame implements Runnable {
     private EnemyPlane BOSS = null;                                         //BOSS
 
     private List<EnemyPlane> myPlanes = new ArrayList<>();                  //道具2使用
-    private boolean DJ2 = false;                                            //用于判断2键是否被按下，用来执行道具2的操作
 
     private boolean IsTheBest = false;                                      //用来判断是否获得历史最佳
 
@@ -134,9 +133,7 @@ public class MainUI extends JFrame implements Runnable {
                 generateEnemyBullet();          //产生敌机子弹
                 moveEnemyBullet();              //移动敌机子弹
 
-                generateMyPlanes();             //道具2中战机的产生
                 moveMyPlanes();                 //道具2中的战机的移动
-                DJ2();                          //道具2对敌机造成伤害的操作
 
                 if (BOSS == null) {
                     generateEnemyPlane();           //产生敌机
@@ -246,28 +243,6 @@ public class MainUI extends JFrame implements Runnable {
         }
     }
 
-    private void DJ2() {
-        for (int j = 0; j < myPlanes.size(); j++) {
-            if (myPlanes.get(j).getY() < Constants.WINDOW_HEIGHT / 2) {
-                for (int i = 0; i < enemyPlanes.size(); i++) {
-                    addBoom(enemyPlanes.get(i));
-                    enemyPlanes.remove(i);
-                    destoryEnemyPlaneNum++;
-                    i--;
-                }
-
-                if (BOSS != null){
-                    BOSS.setHp(BOSS.getHp() - 300);
-                }
-            }
-        }
-    }
-
-    private void generateMyPlanes() {
-        if (DJ2 == true) {
-            Factory.generateMyPlanes(myPlanes);
-        }
-    }
 
     private void moveMyPlanes() {
         EnemyPlane mp = null;
@@ -276,6 +251,15 @@ public class MainUI extends JFrame implements Runnable {
             if (mp.move() == false) {
                 myPlanes.remove(mp);
                 i--;
+            }
+
+            if (mp.getY() < Constants.WINDOW_HEIGHT / 2) {
+                for (int j = 0; j < enemyPlanes.size(); j++) {
+                    addBoom(enemyPlanes.get(j));
+                    enemyPlanes.remove(j);
+                    destoryEnemyPlaneNum++;
+                    j--;
+                }
             }
         }
     }
@@ -352,7 +336,7 @@ public class MainUI extends JFrame implements Runnable {
 
     private void generateMeteor() {
         meteortGenerateInterval++;
-        if (meteortGenerateInterval > 40) {
+        if (meteortGenerateInterval > 100) {
             Factory.generateMeteor(meteors);
             meteortGenerateInterval = 0;
         }
@@ -538,9 +522,15 @@ public class MainUI extends JFrame implements Runnable {
         }
 
         private void DJ2_VK() {
-            if (myPlane.getHp() > myPlane.getMaxEnergy() / 2) {
-                myPlane.setEnergy(0);
-                DJ2 = true;
+            if (myPlane.getEnergy() > 300){
+                Factory.generateMyPlanes(myPlanes);
+                myPlane.setEnergy(myPlane.getEnergy() - 300);
+                if (BOSS != null){
+                    BOSS.setHp(BOSS.getHp() - 1000);
+                    if (BOSS.getHp() < 0){
+                        state = GameState.BOSS_BOOM;
+                    }
+                }
             }
         }
 
@@ -559,8 +549,6 @@ public class MainUI extends JFrame implements Runnable {
                         break;
                     case KeyEvent.VK_RIGHT:
                         RIGHT = false;
-                    case KeyEvent.VK_2:
-                        DJ2 = false;
                         break;
                 }
                 return;
