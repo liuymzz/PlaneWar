@@ -158,4 +158,13 @@ public class Factory {
             }
         }
     }
+
+    /**
+     * 获得一个从0至value的随机数
+     * @param value
+     * @return
+     */
+    public static int random(int value){
+        return random.nextInt(value);
+    }
 }

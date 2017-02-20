@@ -57,6 +57,9 @@ public class MainUI extends JFrame implements Runnable {
 
     private boolean IsTheBest = false;                                      //用来判断是否获得历史最佳
 
+    private int DEADtime = 0;                                               //死亡时间，展示死亡后战机爆炸的效果
+    private int addBOOMSInterval = 0;                                        //死亡时间产生爆炸效果的时间间隔
+
 
     public MainUI() {
         ////游戏元素初始化
@@ -139,6 +142,23 @@ public class MainUI extends JFrame implements Runnable {
                 }
             }
 
+            if (state == GameState.DEAD) {
+                DEADtime ++;
+                map.move();
+                moveEnemyPlane();
+                moveEnemyBullet();
+                moveMeteor();
+                moveMyPlanes();
+                if (DEADtime > 500) {
+                    state = GameState.OVER;
+                    SoundUtils.Play(Medias.getAudios("game_over.wav"), false);
+                    DEADtime = 0;
+                }
+                if (DEADtime < 400) {
+                    addBOOMs();
+                }
+            }
+
             if (state == GameState.OVER) {
                 if (defeat.getY() < 250) {
                     defeat.setY(defeat.getY() + 3);
@@ -153,6 +173,20 @@ public class MainUI extends JFrame implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void addBOOMs() {
+        addBOOMSInterval ++;
+
+        if (addBOOMSInterval > 30) {
+            BOOM boom = new BOOM();
+            boom.setX(Factory.random(myPlane.getX() + myPlane.getWidth() + 100 - (myPlane.getX() - 100)) + myPlane.getX() - 100);
+            boom.setY(Factory.random(myPlane.getY() + myPlane.getHeight() + 100 - (myPlane.getY() - 100)) + myPlane.getY() - 100);
+            booms.add(boom);
+            SoundUtils.Play(Medias.getAudios("explosion_enemy.wav"), false);
+            addBOOMSInterval = 0;
+
         }
     }
 
@@ -198,8 +232,7 @@ public class MainUI extends JFrame implements Runnable {
             if (myPlane.getHurtArea().intersects(bullet.getHurtArea())) {
                 myPlane.setHp(myPlane.getHp() - bullet.getAttack());
                 if (myPlane.getHp() <= 0) {
-                    state = GameState.OVER;
-                    SoundUtils.Play(Medias.getAudios("game_over.wav"),false);
+                    state = GameState.DEAD;
                     zuijia();                          //判断是否获得历史最佳
                 }
 
@@ -347,11 +380,11 @@ public class MainUI extends JFrame implements Runnable {
         boom.setX(gameModel.getX() + gameModel.getWidth() / 2 - boom.getImage().getWidth() / boom.getMaxIndex() / 2);
         boom.setY(gameModel.getY());
         booms.add(boom);
-        if (gameModel instanceof EnemyPlane){
-            SoundUtils.Play(Medias.getAudios("explosion_enemy.wav"),false);
+        if (gameModel instanceof EnemyPlane) {
+            SoundUtils.Play(Medias.getAudios("explosion_enemy.wav"), false);
         }
-        if (gameModel instanceof Meteor){
-            SoundUtils.Play(Medias.getAudios("explosion_asteroid.wav"),false);
+        if (gameModel instanceof Meteor) {
+            SoundUtils.Play(Medias.getAudios("explosion_asteroid.wav"), false);
         }
     }
 
@@ -461,7 +494,7 @@ public class MainUI extends JFrame implements Runnable {
     class MouseAd extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            SoundUtils.Play(Medias.getAudios("click.wav"),false);
+            SoundUtils.Play(Medias.getAudios("click.wav"), false);
             if (state == GameState.WELCOME) {
                 //判断是否点击到退出按钮
                 if (exit.getHurtArea().contains(e.getX(), e.getY())) {
@@ -616,6 +649,29 @@ public class MainUI extends JFrame implements Runnable {
 
                 //画道具2
                 drawDJ2(g);
+
+                return;
+            }
+
+            if (state == GameState.DEAD){
+                drawMap(g);
+                //画敌机
+                drawEnemyPlanes(g);
+
+                //画爆炸效果
+                drawBoom(g);
+
+                //画陨石
+                drawMeteor(g);
+
+                //画玩家飞机的血条
+                drawMyBlood(g);
+
+                //画玩家的能量条
+                drawMyEnergy(g);
+
+                //画敌机子弹
+                drawEnemyBullet(g);
 
                 return;
             }
