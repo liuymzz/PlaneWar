@@ -73,12 +73,12 @@ public class MainUI extends JFrame implements Runnable {
         startGame.setY(Constants.WINDOW_HEIGHT + startGame.getHeight());
         //退出按钮参数
         exit.setImage(Medias.getImage("exit.png"));
-        exit.setX(350);
-        exit.setY(580);
+        exit.setX((int) (Constants.WINDOW_WIDTH * 0.7));
+        exit.setY((int) (Constants.WINDOW_HEIGHT * 0.7));
         //重新开始按钮
         resume.setImage(Medias.getImage("restart1.png"));
-        resume.setX(350);
-        resume.setY(650);
+        resume.setX((int) (Constants.WINDOW_WIDTH * 0.7));
+        resume.setY((int) (Constants.WINDOW_HEIGHT * 0.85));
         //失败
         defeat.setImage(Medias.getImage("defeat.png"));
         defeat.setX(Constants.WINDOW_WIDTH / 2 - defeat.getWidth() / 2);
@@ -156,36 +156,36 @@ public class MainUI extends JFrame implements Runnable {
                 moveEnemyBullet();
                 moveMeteor();
                 moveMyPlanes();
-                if (DEADtime > 500) {
+                if (DEADtime > 300) {
                     state = GameState.OVER;
                     SoundUtils.Play(Medias.getAudios("game_over.wav"), false);
                     DEADtime = 0;
                 }
-                if (DEADtime < 400) {
+                if (DEADtime < 200) {
                     addBOOMs(myPlane);
                 }
             }
 
-            if (state == GameState.BOSS_BOOM){
-                BOSS_BOOM_interval ++;
+            if (state == GameState.BOSS_BOOM) {
+                BOSS_BOOM_interval++;
                 map.move();
                 moveEnemyPlane();
                 moveEnemyBullet();
                 moveMeteor();
                 moveMyPlanes();
-                if (BOSS_BOOM_interval > 500){
+                if (BOSS_BOOM_interval > 500) {
                     state = GameState.GAMING;
                     map.changeMapNum();
                     BOSS_BOOM_interval = 0;
                     BOSS = null;
                 }
-                if (BOSS_BOOM_interval < 400){
+                if (BOSS_BOOM_interval < 400) {
                     addBOOMs(BOSS);
                 }
             }
 
             if (state == GameState.OVER) {
-                if (defeat.getY() < 250) {
+                if (defeat.getY() < (Constants.WINDOW_HEIGHT * 0.2)) {
                     defeat.setY(defeat.getY() + 3);
                 }
             }
@@ -421,13 +421,13 @@ public class MainUI extends JFrame implements Runnable {
             }
 
             //BOSS
-            if (BOSS != null && isRemove == false){
-                if (BOSS.getHurtArea().intersects(bullet.getHurtArea())){
+            if (BOSS != null && isRemove == false) {
+                if (BOSS.getHurtArea().intersects(bullet.getHurtArea())) {
                     BOSS.setHp(BOSS.getHp() - bullet.getAttack());
                     bullets.remove(i);
                     i--;
                     isRemove = true;
-                    if (BOSS.getHp() < 0){
+                    if (BOSS.getHp() < 0) {
                         state = GameState.BOSS_BOOM;
                     }
                 }
@@ -522,12 +522,12 @@ public class MainUI extends JFrame implements Runnable {
         }
 
         private void DJ2_VK() {
-            if (myPlane.getEnergy() > 300){
+            if (myPlane.getEnergy() > 300) {
                 Factory.generateMyPlanes(myPlanes);
                 myPlane.setEnergy(myPlane.getEnergy() - 300);
-                if (BOSS != null){
+                if (BOSS != null) {
                     BOSS.setHp(BOSS.getHp() - 1000);
-                    if (BOSS.getHp() < 0){
+                    if (BOSS.getHp() < 0) {
                         state = GameState.BOSS_BOOM;
                     }
                 }
@@ -744,7 +744,7 @@ public class MainUI extends JFrame implements Runnable {
                 //画敌机子弹
                 drawEnemyBullet(g);
 
-                if (myPlane.getHp() > 0){
+                if (myPlane.getHp() > 0) {
                     //画玩家飞机
                     g.drawImage(myPlane.getCurrImage(), myPlane.getX(), myPlane.getY(), this);
                     //玩家飞机的影子
@@ -800,12 +800,12 @@ public class MainUI extends JFrame implements Runnable {
         }
 
         private void drawHistory(Graphics g) {
-            g.drawString("历史最佳：", 150, 630);
-            g.drawString("飞行距离：" + Factory.getMaxScore("mileage"), 150, 650);
-            g.drawString("击毁敌机：" + Factory.getMaxScore("destory_enemys"), 150, 670);
+            g.drawString("历史最佳：", (int)(Constants.WINDOW_WIDTH * 0.2), (int)(Constants.WINDOW_HEIGHT*0.7));
+            g.drawString("飞行距离：" + Factory.getMaxScore("mileage"), (int)(Constants.WINDOW_WIDTH * 0.2), (int)(Constants.WINDOW_HEIGHT*0.75));
+            g.drawString("击毁敌机：" + Factory.getMaxScore("destory_enemys"), (int)(Constants.WINDOW_WIDTH * 0.2), (int)(Constants.WINDOW_HEIGHT*0.8));
             if (IsTheBest) {
                 g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-                g.drawString("恭喜您是历史最佳！", 150, 690);
+                g.drawString("恭喜您是历史最佳！", (int)(Constants.WINDOW_WIDTH * 0.2), (int)(Constants.WINDOW_HEIGHT*0.75));
             }
         }
 
@@ -816,11 +816,11 @@ public class MainUI extends JFrame implements Runnable {
         }
 
         private void drawOverAchievement(Graphics g) {
-            Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
+            Font font = new Font(Font.MONOSPACED, Font.BOLD, 15);
             g.setFont(font);
-            g.drawString("本次成绩：", 150, 550);
-            g.drawString("飞行距离" + score, 150, 570);
-            g.drawString("击毁敌机" + destoryEnemyPlaneNum + "架", 150, 590);
+            g.drawString("本次成绩：", (int)(Constants.WINDOW_WIDTH*0.2), (int)(Constants.WINDOW_HEIGHT*0.85));
+            g.drawString("飞行距离" + score, (int)(Constants.WINDOW_WIDTH*0.2), (int)(Constants.WINDOW_HEIGHT*0.9));
+            g.drawString("击毁敌机" + destoryEnemyPlaneNum + "架", (int)(Constants.WINDOW_WIDTH*0.2), (int)(Constants.WINDOW_HEIGHT*0.95));
         }
 
         private void drawMyEnergy(Graphics g) {
